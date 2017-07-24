@@ -1,0 +1,42 @@
+{{!-- Page for search by ingredients, time, etc.
+Upon clicking search, results show up, search boxes disspear
+Upon clicking on pictures, recipe shows up --}}
+{{flash}}
+    <div class="hero-body">
+      <div class="container has-text-centered">
+        <div class="columns is-vcentered">
+          <div class="column is-5">
+            <figure class="image is-4by3">
+              <img src="https://lh3.googleusercontent.com/T0Yba02cZ6Sr8IIHoh-X1ysw1hJ2VpNZZ4HRVi5MEqA9jSP9SRd0EaK26ilGvfMod_gkCWx1fnne1bVoFTqMpw=s730-e365" class="promo-img" alt="Description">
+            </figure>
+          </div>
+          <div class="column is-6 is-offset-1">
+            <h1 class="title is-2">
+              Start Cooking Now
+            </h1>
+            <h2 class="subtitle is-4">
+              It's time to take charge of your meals.
+            </h2>
+            <br>
+            <p class="control has-addons has-text-centered">
+              <input class="input is-expanded is-large" type="text" placeholder="Chicken" name="query" id="inputBox">
+              <button id='ingredientsSearch' class="button is-large is-danger is-outlined">
+                Search
+              </button>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id='searchResults' class='resultContainer'>
+    </div>
+
+      <div class='resultContainer'>
+        <div id='recipePageLeft'>
+        </div>
+        <div id='recipePageRight'>
+          <ul class = 'ingredientList'>
+          </ul>
+        </div>
+      </div>
