@@ -1,7 +1,9 @@
 #my own progress:
-created model, no controller or routes yet.
-need to think about how to add from script.js to db
+combine user to recipe model
 need to deploy to Heroku
+need to incorporate flash msg to show password error
+combine with meal plan models so as to display calories
+need to think about how to display > 1 page
 
 # Your Project Name
 

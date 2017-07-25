@@ -1,0 +1,34 @@
+<h1>favreceipe page</h1>
+
+<section id='table'>
+</section>
+
+{{#if user}}
+  <p>Welcome back! {{user.name}} </p>
+  <h1>your saved items</h1>
+  {{!-- iterate thru each recipe as they are array --}}
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Calories</th>
+      {{!-- <th>Name</th> --}}
+      <th>Time Required</th>
+    </tr>
+    {{#each dbitems as |recipe|}}
+    <tr>
+      <td>{{recipe.name}}</td>
+      <td class='calories'>{{recipe.calories}}</td>
+      {{!-- <td>{{recipe.ingredients}}</td> --}}
+      <td>{{recipe.timeDisplay}}</td>
+    </tr>
+    {{!-- <button id='addMeal'>Add To Weekly Meals</button> --}}
+    {{/each}}
+  </table>
+  <a href='/userAuth/logout'>LOG OUT</a>
+
+{{else }}
+  <p>Please signup / login to access this page</p>
+
+{{/if}}
+
+need to add buttons here, and add functionality to it???

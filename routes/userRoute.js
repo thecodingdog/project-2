@@ -20,13 +20,9 @@ router.get('/login',function(req,res){
 
 //this routes the login page if success or fails
 router.post('/login', passport.authenticate('local', {
-  successRedirect: '/userAuth/favrecipe',
+  successRedirect: '/favrecipe',
   failureRedirect: '/userAuth/login'
 }))
-
-router.get('/favrecipe',function(req,res){
-  res.render('userAuth/favrecipe')
-})
 
 router.get('/logout', function(req, res) {
   req.logout();

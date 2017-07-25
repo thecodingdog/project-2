@@ -8,6 +8,10 @@ $(function () {
   const $inputBox = $('#inputBox')
 
   $searchIngredients.on('click', obtainQuery)
+  $('#inputBox').keypress(function (e) {
+    var key = e.which;
+    if(key == 13) {obtainQuery()}
+  })
 
   function obtainQuery () {
     let query = $inputBox[0].value
@@ -26,17 +30,19 @@ $(function () {
       let results = data.matches
       console.log(results)
       results.forEach(function (e) {
-        let img = e.imageUrlsBySize[90]
-        img = img.replace(/s90-c/g, `s300-e300`)
-        let title = e.recipeName
-        let $div = $('<div>')
-        $div.addClass('imgDisplay')
-        $div.css('background-image', `url(${img})`)
-        $div.text(title)
-        $div.attr('data-myval', e.id)
-        $searchResults.append($div)
-        $div.on('click', idSearch)
-        $div = $(this)
+        if (e.imageUrlsBySize) {
+          let img = e.imageUrlsBySize[90]
+          img = img.replace(/s90-c/g, `s300-e300`)
+          let title = e.recipeName
+          let $div = $('<div>')
+          $div.addClass('imgDisplay')
+          $div.css('background-image', `url(${img})`)
+          $div.text(title)
+          $div.attr('data-myval', e.id)
+          $searchResults.append($div)
+          $div.on('click', idSearch)
+          $div = $(this)
+        }
       })
     })
   }
@@ -50,7 +56,7 @@ $(function () {
     $.get(specificUrl).done(function (data) {
       console.log(data)
       displayRecipe(data)
-      // how to redirect to recipe index with the data
+
     })
   }
 
@@ -58,36 +64,59 @@ $(function () {
   function displayRecipe (data) {
     $('#searchResults').html('')
     $('.hero-body').html('')
-    let serving = data.numberOfServings
-    let timeDisplay = data.totalTime
-    let name = data.name
-    let image = data.images[0].hostedLargeUrl
-    let instructions = data.source.sourceRecipeUrl
-    let ingredients = data.ingredientLines // array
-    let timeSeconds = data.totalTimeInSeconds
-    let course = data.attributes.course
-    let cuisine = data.attributes.cuisine
-    let rating = data.rating
-    let calories = data.nutritionEstimates.value
-    console.log(ingredients)
 
-    let $serving = (`<p>Servings: ${serving}`)
-    let $timeDisplay = (`<p>Time Required: ${timeDisplay}`)
-    let $name = (`<h1>${name}`)
-    let $image = (`<img src=${image}>`)
-    let $instructions = (`<a href=${instructions}>Link to Instructions`)
-    ingredients.forEach(function (e) {
+    //extracting calories
+    let array = data.nutritionEstimates.map(function (e){
+      if (e.attribute == 'ENERC_KCAL'){
+        return e.value
+      }
+    })
+    let calories = array.filter(Boolean)
+
+    let newRecipe = {
+       serving : data.numberOfServings,
+       timeDisplay : data.totalTime,
+       name : data.name,
+       image : data.images[0].hostedLargeUrl,
+       instructions : data.source.sourceRecipeUrl,
+       ingredients : data.ingredientLines, // array
+       timeSeconds : data.totalTimeInSeconds,
+       course : data.attributes.course,
+       cuisine : data.attributes.cuisine,
+       rating : data.rating,
+       calories : calories[0]
+    }
+
+    let $serving = (`<p>Servings: ${newRecipe.serving}`)
+    let $timeDisplay = (`<p>Time Required: ${newRecipe.timeDisplay}`)
+    let $name = (`<h1>${newRecipe.name}`)
+    let $image = (`<img src=${newRecipe.image}>`)
+    let $instructions = (`<a href=${newRecipe.instructions}>Link to Instructions`)
+    newRecipe.ingredients.forEach(function (e) {
       let $ingredient = (`<li>${e}</li>`)
       $ingredientList = $('.ingredientList')
       $ingredientList.append($ingredient)
     })
-    let $course = (`<p>Course: ${course}`)
-    let $cuisine = (`<p>Cuisine: ${cuisine}`)
-    let $rating = (`<p>Rating: ${rating}`)
+    let $course = (`<p>Course: ${newRecipe.course}`)
+    let $cuisine = (`<p>Cuisine: ${newRecipe.cuisine}`)
+    let $rating = (`<p>Rating: ${newRecipe.rating}`)
     let $calories = (`<p>Calories: ${calories}`)
-    let $addBtn = $(`<button>Add to Fave</button>`)
-
-    $('#recipePageLeft').append($name, $image, $timeDisplay, $rating, $calories)
+    let $addBtn = $(`<button id='addBtn' class='enabled'>Add to Fave</button>`)
+    $('#calories').append($calories)
+    $('#recipePageLeft').append($name, $image, $timeDisplay, $rating)
     $('#recipePageRight').append($serving, $ingredientList, $instructions, $course, $cuisine, $addBtn)
+
+    //to add event listener to click button that doesn't exist
+    $('#recipePageRight').on('click','#addBtn',function(){
+      sendPost(newRecipe)
+    })
+    // how to redirect to recipe index with the data
+  }
+
+  function sendPost(data){
+    $.post('/favrecipe/add', data).done(function (status){
+      $('#addBtn').text('ADDED!')
+      $('#addBtn').removeClass('enabled')
+    })
   }
 })

@@ -5,6 +5,7 @@ const User = require('../models/User')
 //passport "serializes" objects to make them easy to store, converting the user to an identifier (id)
 passport.serializeUser(function (user,done){
   done(null, user.id)
+  console.log(user.id);
 })
 
 // Passport "deserializes" objects by taking the user's serialization (id) and looking it up in the database

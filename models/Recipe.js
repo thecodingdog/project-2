@@ -1,22 +1,22 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-const receipeSchema = new Schema({
-  name: {type: String},
-  serving = {type: Number},
-  timeDisplay = {type: String},
-  name = {type: String},
-  imageUrl = {type: String},
-  instructionsUrl = {type: String},
-  ingredients = [],
-  timeSeconds = {type: Number},
-  course = {type: String},
-  cuisine = {type: String},
-  rating = {type: Number},
-  calories = {type: Number},
+const recipeSchema = new Schema({
+  name: String,
+  serving : Number,
+  timeDisplay : String,
+  name : String,
+  imageUrl : String,
+  instructionsUrl : String,
+  ingredients : [],
+  timeSeconds : Number,
+  course : String,
+  cuisine : String,
+  rating : Number,
+  calories : Number,
   users: [{
     type: Schema.Types.ObjectId,
-    ref: 'Recipe'
+    ref: 'User'
   }],
   meals: [{
     type: Schema.Types.ObjectId,
