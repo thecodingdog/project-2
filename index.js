@@ -9,12 +9,7 @@ const session = require('express-session')
 const MongoStore = require('connect-mongo')(session)
 const flash = require('connect-flash')
 const passport = require('./config/passport')
-
-
-// const passport = require('./config/passport')
-// app.use(passport.initialize())
-
-const url = 'mongodb://localhost:27017/project-2'
+const url = 'mongodb://localhost:27017/project-2' || process.env.MONGODB_URI
 
 mongoose.Promise = global.Promise
 mongoose.connect(url, {
@@ -44,7 +39,6 @@ app.use(session({
   saveUninitialized: true,
   store: new MongoStore({
     url: url
-    //process.env.MONGODB_URI
   })
 }))
 
