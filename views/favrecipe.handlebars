@@ -1,34 +1,50 @@
-<h1>favreceipe page</h1>
-
-<section id='table'>
-</section>
-
 {{#if user}}
-  <p>Welcome back! {{user.name}} </p>
-  <h1>your saved items</h1>
-  {{!-- iterate thru each recipe as they are array --}}
+<h1 class="title is-2">
+  Welcome back {{user.name}} !
+</h1>
+
+<h2 class="subtitle is-4">
+  <span> Total Consumption </span> <br>
+  {{totalCalories}} <br>
+  {{totalTime}}
+</h2>
+
+<h2 class="subtitle is-4">
+  <span>Planned Meals</span>
+</h2>
   <table>
     <tr>
       <th>Name</th>
       <th>Calories</th>
-      {{!-- <th>Name</th> --}}
       <th>Time Required</th>
+      <th>Ingredients Required</th>
     </tr>
+
     {{#each dbitems as |recipe|}}
     <tr>
       <td>{{recipe.name}}</td>
       <td class='calories'>{{recipe.calories}}</td>
-      {{!-- <td>{{recipe.ingredients}}</td> --}}
       <td>{{recipe.timeDisplay}}</td>
+      <td>
+        <ul>
+          {{#each recipe.ingredients as |ingredient|}}
+            <li> {{ingredient}} </li>
+          {{/each}}
+        </ul>
+      </td>
     </tr>
+
     {{!-- <button id='addMeal'>Add To Weekly Meals</button> --}}
     {{/each}}
   </table>
+
   <a href='/userAuth/logout'>LOG OUT</a>
 
 {{else }}
-  <p>Please signup / login to access this page</p>
+<h1 class="title is-2">
+  Please <span><a href = '/userAuth/register'> signup / </a> <a href = '/userAuth/login'> login </a> </span> to access this page
+</h1>
 
 {{/if}}
 
-need to add buttons here, and add functionality to it???
+{{!-- need to add buttons here, and add functionality to it??? --}}
