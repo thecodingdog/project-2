@@ -1,7 +1,7 @@
 $(function () {
   // $(document).ready(function() { // same thing as above
 
-  const apiUrl = 'http://api.yummly.com/v1/api/recipes?_app_id=16387952&_app_key=fa6bd04f985e3b1a42e5880de6dcb9e5&q='
+  const apiUrl = 'https://api.yummly.com/v1/api/recipes?_app_id=16387952&_app_key=fa6bd04f985e3b1a42e5880de6dcb9e5&q='
 
   const $searchIngredients = $('#ingredientsSearch')
   const $searchResults = $('#searchResults')
@@ -49,7 +49,7 @@ $(function () {
 
   //callback function to view detailed recipe
   function idSearch (specificUrl, specific) {
-    let basic = 'http://api.yummly.com/v1/api/recipe/'
+    let basic = 'https://api.yummly.com/v1/api/recipe/'
     var specific = $(this).data('myval') // div.id
     let ending = '?_app_id=16387952&_app_key=fa6bd04f985e3b1a42e5880de6dcb9e5'
     var specificUrl = `${basic}${specific}${ending}`
@@ -115,6 +115,7 @@ $(function () {
 
   function sendPost(data){
     $.post('/favrecipe/add', data).done(function (status){
+      console.log('added');
       $('#addBtn').text('ADDED!')
       $('#addBtn').removeClass('enabled')
     })
