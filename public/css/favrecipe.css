@@ -1,0 +1,34 @@
+.is-dark {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.1),rgba(255, 255, 255, 0.1)),linear-gradient(rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.3)), url('/img/teapot background.jpeg');
+  background-size: cover;
+}
+
+span{
+  font-size: 120%;
+  text-decoration: underline;
+}
+
+body{
+  color: white;
+  font-size: 20px;
+}
+
+th{
+  color: white;
+  background-color: black;
+}
+
+button{
+  /*margin: auto;*/
+  width: 300px;
+  color: #FFFFFF;
+  background: #3dd28d;
+  padding: 20px;
+  font:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: 20px;
+  cursor: pointer;
+}
+
+#delete{
+  background-color: red;
+}

@@ -1,6 +1,8 @@
 {{!-- Page for search by ingredients, time, etc.
 Upon clicking search, results show up, search boxes disspear
 Upon clicking on pictures, recipe shows up --}}
+<link rel="stylesheet" type="text/css" href="/css/search.css">
+
 {{flash}}
     <div class="hero-body">
       <div class="container has-text-centered">
@@ -23,6 +25,7 @@ Upon clicking on pictures, recipe shows up --}}
               <button id='ingredientsSearch' class="button is-large is-danger is-outlined">
                 Search
               </button>
+              <img src='/img/spinner.gif' id='spinner'></img>
             </p>
           </div>
         </div>
@@ -34,10 +37,12 @@ Upon clicking on pictures, recipe shows up --}}
 
       <div class='resultContainer'>
         <div id='recipePageLeft'>
-          <h1 id='calories'></h1>
+          <div id='bottomleft'></div>
         </div>
         <div id='recipePageRight'>
           <ul class = 'ingredientList'>
           </ul>
         </div>
+        <button id='next'>Next</button>
+        <img src='/img/spinner.gif' id='spinner'></img>
       </div>

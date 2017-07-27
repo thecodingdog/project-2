@@ -2,31 +2,38 @@ $(function () {
   // $(document).ready(function() { // same thing as above
 
   const apiUrl = 'https://api.yummly.com/v1/api/recipes?_app_id=16387952&_app_key=fa6bd04f985e3b1a42e5880de6dcb9e5&q='
+  const page = '&maxResult=8&start='
+  let start = 8
 
   const $searchIngredients = $('#ingredientsSearch')
   const $searchResults = $('#searchResults')
   const $inputBox = $('#inputBox')
+  const $spinner = $('#spinner')
 
   $searchIngredients.on('click', obtainQuery)
   $('#inputBox').keypress(function (e) {
-    var key = e.which;
-    if(key == 13) {obtainQuery()}
+    var key = e.which
+    if (key == 13) { obtainQuery() }
   })
 
+  $('#next').on('click', obtainQuery)
+
   function obtainQuery () {
+    $('#next').css('display', 'inline-block')
     let query = $inputBox[0].value
-    var finalUrl = `${apiUrl}${query}`
-    // window.location = "/result"
+    var finalUrl = `${apiUrl}${query}${page}${start}`
     ajaxTextSearch(finalUrl, query)
+    start += 8
+    // window.location = "/result"
   }
 
   function ajaxTextSearch (finalUrl, query) {
     console.log('ajaxran')
-    // $spinner.fadeIn()
+    $spinner.fadeIn()
     // callback for all related results
     $.get(finalUrl).done(function (data) {
-      // $spinner.fadeOut()
-      $('.hero-body').html('')
+      $spinner.fadeOut()
+      $('.hero-body').remove()
       let results = data.matches
       console.log(results)
       results.forEach(function (e) {
@@ -37,8 +44,13 @@ $(function () {
           let $div = $('<div>')
           $div.addClass('imgDisplay')
           $div.css('background-image', `url(${img})`)
-          $div.text(title)
           $div.attr('data-myval', e.id)
+          // title div
+          let $textdiv = $('<div>')
+          $textdiv.addClass('textdiv')
+          $textdiv.text(title)
+          $textdiv.hover()
+          $div.append($textdiv)
           $searchResults.append($div)
           $div.on('click', idSearch)
           $div = $(this)
@@ -47,8 +59,9 @@ $(function () {
     })
   }
 
-  //callback function to view detailed recipe
+  // callback function to view detailed recipe
   function idSearch (specificUrl, specific) {
+    $('#next').css('display', 'none')
     let basic = 'https://api.yummly.com/v1/api/recipe/'
     var specific = $(this).data('myval') // div.id
     let ending = '?_app_id=16387952&_app_key=fa6bd04f985e3b1a42e5880de6dcb9e5'
@@ -56,35 +69,34 @@ $(function () {
     $.get(specificUrl).done(function (data) {
       console.log(data)
       displayRecipe(data)
-
     })
   }
 
-  //callback to display recipe data in DOM
+  // callback to display recipe data in DOM
   function displayRecipe (data) {
-    $('#searchResults').html('')
-    $('.hero-body').html('')
+    $('#searchResults').remove()
+    $('.hero-body').remove()
 
-    //extracting calories
-    let array = data.nutritionEstimates.map(function (e){
-      if (e.attribute == 'ENERC_KCAL'){
+    // extracting calories
+    let array = data.nutritionEstimates.map(function (e) {
+      if (e.attribute == 'ENERC_KCAL') {
         return e.value
       }
     })
     let calories = array.filter(Boolean)
 
     let newRecipe = {
-       serving : data.numberOfServings,
-       timeDisplay : data.totalTime,
-       name : data.name,
-       image : data.images[0].hostedLargeUrl,
-       instructions : data.source.sourceRecipeUrl,
-       ingredients : data.ingredientLines, // array
-       timeSeconds : data.totalTimeInSeconds,
-       course : data.attributes.course,
-       cuisine : data.attributes.cuisine,
-       rating : data.rating,
-       calories : calories[0]
+      serving: data.numberOfServings,
+      timeDisplay: data.totalTime,
+      name: data.name,
+      image: data.images[0].hostedLargeUrl,
+      instructions: data.source.sourceRecipeUrl,
+      ingredients: data.ingredientLines, // array
+      timeSeconds: data.totalTimeInSeconds,
+      course: data.attributes.course,
+      cuisine: data.attributes.cuisine,
+      rating: data.rating,
+      calories: calories[0]
     }
 
     let $serving = (`<p>Servings: ${newRecipe.serving}`)
@@ -101,23 +113,54 @@ $(function () {
     let $cuisine = (`<p>Cuisine: ${newRecipe.cuisine}`)
     let $rating = (`<p>Rating: ${newRecipe.rating}`)
     let $calories = (`<p>Calories: ${calories}`)
-    let $addBtn = $(`<button id='addBtn' class='enabled'>Add to Fave</button>`)
-    $('#calories').append($calories)
+    let $addBtn = $(`<button id='addBtn' class='enabled'>Add to My Meals</button>           <img src='/img/spinner.gif' id='spinner3'></img>
+`)
+
     $('#recipePageLeft').append($name, $image, $timeDisplay, $rating)
+    $('#bottomleft').append($calories, $rating, $timeDisplay)
     $('#recipePageRight').append($serving, $ingredientList, $instructions, $course, $cuisine, $addBtn)
 
-    //to add event listener to click button that doesn't exist
-    $('#recipePageRight').on('click','#addBtn',function(){
-      sendPost(newRecipe)
+    // to add event listener to click button that doesn't exist
+    $('#recipePageRight').on('click', '#addBtn', function (e) {
+      e.preventDefault()
+      $('#spinner3').fadeIn()
+      $.post('/favrecipe/add', newRecipe).done(function (data) {
+        console.log(data)
+        if (data.status === 'ok') { alert('added to my meals!') }
+        $('#spinner3').fadeOut()
+        $('#addBtn').hide()
+        $('#mymeals').html('<span> New </span> - My Meals')
+
+        // $('#addBtn').removeClass('enabled')
+      })
     })
-    // how to redirect to recipe index with the data
   }
 
-  function sendPost(data){
-    $.post('/favrecipe/add', data).done(function (status){
-      console.log('added');
-      $('#addBtn').text('ADDED!')
-      $('#addBtn').removeClass('enabled')
+  $('#delete').on('click',function(e){
+    // e.preventDefault()
+    $.post('/favrecipe/removeAll').done(function(){
+      alert('removed all');
     })
-  }
+  })
+
+  $('body').on('click','#edit',function(){
+    const editBtn=$(this)
+    const btnInfo = {
+      recipeid : editBtn[0].value,
+      cookingnotes : 'more salt'
+    }
+    $.post('/favrecipe/update',btnInfo,function(){
+      console.log('edited');
+    })
+  })
+  //   $deleteBtn = $('.delete')
+  // $('.delete').on('click', function () {
+  //   console.log($deleteBtn[0]);
+  //   let recipeid = $deleteBtn('myval')
+  //   console.log(recipeid);
+  //   $deleteBtn = $(this)
+  //   $.post('/favrecipe/remove', recipeid).done(function (data) {
+  //     console.log('removed')
+  //   })
+  // })
 })

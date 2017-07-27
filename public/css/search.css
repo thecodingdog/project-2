@@ -1,0 +1,82 @@
+.is-dark {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.1),rgba(255, 255, 255, 0.1)),linear-gradient(rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.3)), url('/img/background.jpeg');
+  background-size: cover;
+}
+
+#spinner{
+  display: none;
+}
+
+#spinner3{
+  display: none;
+}
+
+#next{
+  display: none;
+  margin: auto;
+  width: 600px;
+  color: #FFFFFF;
+  background: #3dd28d;
+  padding: 20px;
+  font:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.imgDisplay .textdiv{
+  display: none;
+  font-size: 30px;
+}
+
+.imgDisplay:hover .textdiv{
+  background-color: rgba(0,0,0,0.6);
+  display: block;
+}
+
+body{
+  font-size: 24px;
+  color: black;
+}
+
+h1{
+  font-size: 120%;
+
+}
+
+.resultContainer{
+  margin-top: 40px;
+  margin-bottom: 0px;
+  margin-left: 100px;
+  margin-right: 100px;
+  display: flex;
+  flex-wrap: wrap;
+  background-color: (255,255,255,1);
+}
+
+.imgDisplay{
+  margin-top: 10px;
+  margin-right: 10px;
+  width: 300px;
+  height: 300px;
+  background-size: cover;
+  cursor: pointer;
+  border: 1px;
+  border-style: solid;
+
+}
+
+#recipePageLeft{
+    width: 600px;
+}
+
+.enabled{
+  background-color: pink;
+  width: 100px;
+  height: 50px;
+}
+
+span{
+  text-decoration: underline;
+  color: cyan;
+  font-size: 120%;
+}

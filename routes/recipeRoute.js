@@ -4,12 +4,12 @@ const router = express.Router()
 const recipeController = require('../controllers/recipeController')
 const passport = require('../config/passport')
 
-router.get('/', recipeController.findAllById)
+router.get('/', recipeController.authenticateUser, recipeController.findAllById)
 
 router.post('/add', recipeController.add)
 
-// router.post('/remove', recipeController.create)
+router.post('/removeAll', recipeController.destroyAll)
 
-// router.post('/removeAll', recipeController.create)
+router.post('/update', recipeController.update)
 
   module.exports = router

@@ -3,7 +3,7 @@ const User = require('../models/User')
 const passport = require('../config/passport')
 
 // add to user only
-function add(req, res) {
+function add (req, res) {
   Recipe.create({
     serving: req.body.serving,
     timeDisplay: req.body.timeDisplay,
@@ -12,29 +12,33 @@ function add(req, res) {
     instructionsUrl: req.body.instructions,
     ingredients: req.body.ingredients,
     timeSeconds: req.body.timeSeconds,
-    course: req.body.course[0],
+    course: req.body.course,
     cuisine: req.body.cuisine,
     rating: req.body.rating,
     calories: req.body.calories
-  }, function(err, recipe) { // remember that AJAX post can't redirect, callback is for linking recipe
+  }, function (err, recipe) { // remember that AJAX post can't redirect, callback is for linking recipe
     if (err) console.log(err)
+    console.log(req.user)
     recipe.users.push(req.user.id) // first callback: push user id into recipe
     recipe.save()
     // push recipe into user, don't have to find again coz req.user is persistent thru passport
     req.user.recipes.push(recipe.id)
     req.user.save()
+    res.send({
+      status: 'ok'
+    })
     // console.log(req.user)
   })
 }
 
 // findAll for individual users
-function findAllById(req, res) {
+function findAllById (req, res) {
   if (req.user) {
     User.find({
-        _id: req.user.id
-      })
+      _id: req.user.id
+    })
       .populate('recipes')
-      .exec(function(err, data) {
+      .exec(function (err, data) {
         // console.log(data[0].recipes[0]);
         if (err) send(err)
         res.render('favrecipe', {
@@ -51,15 +55,30 @@ function findAllById(req, res) {
   }
 }
 
-function sumCalories(re, e, i) {
+function destroyAll (req, res) {
+  req.user.recipes.splice(0)
+  req.user.save()
+  res.redirect('/')
+}
+
+function update (req, res) {
+  console.log(req.body)
+  Recipe.findOneAndUpdate(
+  {_id: req.body.recipeid}, {cookingnotes: req.body.cookingnotes}, function (err) {
+    if (err)console.log(err)
+    res.redirect('/favrecipe')
+  })
+}
+// cookingnotes:req.body.notes
+function sumCalories (re, e, i) {
   return Math.floor(re + e.calories)
 }
 
-function sumTime(re, e, i) {
+function sumTime (re, e, i) {
   return re + e.timeSeconds
 }
 
-function convert(num) {
+function convert (num) {
   if (num / 60 < 60) {
     var minutes = num / 60
     return (`Time: ${minutes} minutes required`)
@@ -70,13 +89,20 @@ function convert(num) {
   }
 }
 
-function timeCombined(arr){
-  let totalSeconds = arr.reduce(sumTime,0)
+function timeCombined (arr) {
+  let totalSeconds = arr.reduce(sumTime, 0)
   return convert(totalSeconds)
 }
 
+function authenticateUser (req, res, next) {
+  if (req.isAuthenticated()) { return next() } // if user is logged in, do next
+  else { res.redirect('/userAuth/login') }
+}
 
 module.exports = {
   add,
-  findAllById
+  findAllById,
+  destroyAll,
+  update,
+  authenticateUser
 }

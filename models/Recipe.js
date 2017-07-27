@@ -14,13 +14,10 @@ const recipeSchema = new Schema({
   cuisine : String,
   rating : Number,
   calories : Number,
+  cookingnotes: String,
   users: [{
     type: Schema.Types.ObjectId,
     ref: 'User'
-  }],
-  meals: [{
-    type: Schema.Types.ObjectId,
-    ref: 'Meal'
   }]
 })
 

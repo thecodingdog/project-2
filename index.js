@@ -52,10 +52,6 @@ const recipeRoute = require('./routes/recipeRoute')
 
 //public routes
 app.get('/', function(req,res){
-  res.render('index')
-})
-
-app.get('/search', function(req,res){
   res.render('search')
 })
 
@@ -64,7 +60,7 @@ app.use('/userAuth', userRoute)
 app.use('/favrecipe', recipeRoute)
 
 //opening the port
-const port = process.env.PORT || 5000
+const port = process.env.PORT || 7000
 app.listen(port, function () {
   console.log(`express is running on ${port}`)
 })

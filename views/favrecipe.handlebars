@@ -1,4 +1,7 @@
-{{#if user}}
+
+{{!-- {{#if user}} --}}
+
+<link rel="stylesheet" type="text/css" href="/css/favrecipe.css">
 <h1 class="title is-2">
   Welcome back {{user.name}} !
 </h1>
@@ -18,6 +21,8 @@
       <th>Calories</th>
       <th>Time Required</th>
       <th>Ingredients Required</th>
+      <th>Cooking Notes</th>
+      <th> </th>
     </tr>
 
     {{#each dbitems as |recipe|}}
@@ -32,19 +37,29 @@
           {{/each}}
         </ul>
       </td>
+      <td>
+        {{recipe.cookingnotes}}
+      </td>
+      <td>
+          <button id='edit' value='{{recipe.id}}'>edit</button>
+      </td>
     </tr>
 
     {{!-- <button id='addMeal'>Add To Weekly Meals</button> --}}
     {{/each}}
   </table>
 
-  <a href='/userAuth/logout'>LOG OUT</a>
+  <form action='/favrecipe/removeAll' method=post >
+    <button id=delete>DELETE ALL RECIPES</button>
+  </form>
 
-{{else }}
+  <button><a href='/userAuth/logout'>LOG OUT</a></button>
+
+{{!-- {{else }}
 <h1 class="title is-2">
   Please <span><a href = '/userAuth/register'> signup / </a> <a href = '/userAuth/login'> login </a> </span> to access this page
 </h1>
 
-{{/if}}
+{{/if}} --}}
 
 {{!-- need to add buttons here, and add functionality to it??? --}}
