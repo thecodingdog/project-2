@@ -1,6 +1,5 @@
-# Your Project Name
+# Care-lo-ries
 
-Care-lo-ries
 This website is meant to help people
 * get inspiration for recipes
 * control calorie intake by planning their meals ahead and checking if the total calories planned for the day / week fits within their personal target
@@ -57,7 +56,7 @@ https://thecodingdog.herokuapp.com/
 
 ## Workflow
 
-#User Story
+# User Story
 1. search recipes
 2. add to favorites
 3. track calorie intake
@@ -66,10 +65,10 @@ https://thecodingdog.herokuapp.com/
 6. view saved plans and key ingredients
 7. able to jot down some notes for the recipes
 
-#Model diagram
+# Model diagram
 ![alt text](public/img/erd.jpg?raw=true 'start')
 
-#Wireframes
+# Wireframes
 ![alt text](public/img/wireframe.jpg?raw=true 'start')
 
 ## Acknowledgments
