@@ -19,7 +19,6 @@ $(function () {
   $('#next').on('click', obtainQuery)
 
   function obtainQuery () {
-    $('#next').css('display', 'inline-block')
     let query = $inputBox[0].value
     var finalUrl = `${apiUrl}${query}${page}${start}`
     ajaxTextSearch(finalUrl, query)
@@ -33,6 +32,7 @@ $(function () {
     // callback for all related results
     $.get(finalUrl).done(function (data) {
       $spinner.fadeOut()
+      $('#next').css('display', 'inline-block')
       $('.hero-body').remove()
       let results = data.matches
       console.log(results)
@@ -93,32 +93,32 @@ $(function () {
       instructions: data.source.sourceRecipeUrl,
       ingredients: data.ingredientLines, // array
       timeSeconds: data.totalTimeInSeconds,
-      course: data.attributes.course,
-      cuisine: data.attributes.cuisine,
+      // course: data.attributes.course,
+      // cuisine: data.attributes.cuisine,
       rating: data.rating,
       calories: calories[0]
     }
 
-    let $serving = (`<p>Servings: ${newRecipe.serving}`)
-    let $timeDisplay = (`<p>Time Required: ${newRecipe.timeDisplay}`)
+    let $serving = (`<p><u>Servings: ${newRecipe.serving}</u>`)
+    let $timeDisplay = (`<p>Time:<br> <em>${newRecipe.timeDisplay}</em>`)
     let $name = (`<h1>${newRecipe.name}`)
     let $image = (`<img src=${newRecipe.image}>`)
-    let $instructions = (`<a href=${newRecipe.instructions}>Link to Instructions`)
+    let $instructions = (`<a href=${newRecipe.instructions} target="_blank"><u> Instructions</u><br></a>`)
     newRecipe.ingredients.forEach(function (e) {
       let $ingredient = (`<li>${e}</li>`)
       $ingredientList = $('.ingredientList')
       $ingredientList.append($ingredient)
     })
-    let $course = (`<p>Course: ${newRecipe.course}`)
-    let $cuisine = (`<p>Cuisine: ${newRecipe.cuisine}`)
-    let $rating = (`<p>Rating: ${newRecipe.rating}`)
-    let $calories = (`<p>Calories: ${calories}`)
+    // let $course = (`<p>Course: ${newRecipe.course}`)
+    // let $cuisine = (`<p>Cuisine: ${newRecipe.cuisine}`)
+    let $rating = (`<p>Rating: <br><em>${newRecipe.rating}</em>`)
+    let $calories = (`<p>Calories: <br><em>${calories}</em>`)
     let $addBtn = $(`<button id='addBtn' class='enabled'>Add to My Meals</button>           <img src='/img/spinner.gif' id='spinner3'></img>
 `)
 
-    $('#recipePageLeft').append($name, $image, $timeDisplay, $rating)
+    $('#recipePageLeft').append($name, $image)
     $('#bottomleft').append($calories, $rating, $timeDisplay)
-    $('#recipePageRight').append($serving, $ingredientList, $instructions, $course, $cuisine, $addBtn)
+    $('#recipePageRight').append($serving, $ingredientList, $instructions, $addBtn)
 
     // to add event listener to click button that doesn't exist
     $('#recipePageRight').on('click', '#addBtn', function (e) {
@@ -136,31 +136,31 @@ $(function () {
     })
   }
 
-  $('#delete').on('click',function(e){
+  $('#delete').on('click', function (e) {
     // e.preventDefault()
-    $.post('/favrecipe/removeAll').done(function(){
-      alert('removed all');
+    $.post('/favrecipe/removeAll').done(function () {
+      alert('removed all')
     })
   })
 
-  $('body').on('click','#edit',function(){
-    const editBtn=$(this)
+  $('body').on('click', '#good', function () {
+    const editBtn = $(this)
     const btnInfo = {
-      recipeid : editBtn[0].value,
-      cookingnotes : 'more salt'
+      recipeid: editBtn[0].value,
+      cookingnotes: 'Was Really Good!'
     }
-    $.post('/favrecipe/update',btnInfo,function(){
-      console.log('edited');
+    $.post('/favrecipe/update', btnInfo, function () {
+      console.log('edited')
     })
   })
-  //   $deleteBtn = $('.delete')
-  // $('.delete').on('click', function () {
-  //   console.log($deleteBtn[0]);
-  //   let recipeid = $deleteBtn('myval')
-  //   console.log(recipeid);
-  //   $deleteBtn = $(this)
-  //   $.post('/favrecipe/remove', recipeid).done(function (data) {
-  //     console.log('removed')
-  //   })
-  // })
+  $('body').on('click', '#bad', function () {
+    const editBtn = $(this)
+    const btnInfo = {
+      recipeid: editBtn[0].value,
+      cookingnotes: 'Do Not Repeat this dish.'
+    }
+    $.post('/favrecipe/update', btnInfo, function () {
+      console.log('edited')
+    })
+  })
 })
