@@ -11,16 +11,18 @@ router.route('/register')
   //if post registration, login user by adding a next to create in userController
   .post(userController.create, passport.authenticate('local', { //can't jump to function authenticateUser coz user has never been authenticated before! session not even been created yet.
     successRedirect: '/favrecipe',
-    failureRedirect: '/userAuth/login'
+    failureRedirect: '/userAuth/login',
   }))
 
 //if you get login, should check if user has been logged in before if true, render fav recipe. if false, next goes login
 router.route('/login')
-    .get(userController.authenticateUser, function(req,res){
-      res.render('userAuth/login')
+    .get(userController.authenticateUser, function(req,res){ //if not authenticated, runs next
+      // console.log(req.flash('message'))
+      res.render('userAuth/login',{loginflash: req.flash('message')})
       })
     .post(passport.authenticate('local', { //this routes the login page if success or fails
       successRedirect: '/favrecipe',
+      failureFlash : true,
       failureRedirect: '/userAuth/login'
     }))
 

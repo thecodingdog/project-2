@@ -42,16 +42,18 @@
           {{/each}}
         </ul>
       </td>
-      <td class="text-left">
+      <td class="text-left, cookingnotes">
         {{recipe.cookingnotes}}
       </td>
       <td class='text-center'>
-          <button id='good' value='{{recipe.id}}'>Cook Again?</button>
-          <button id='bad' value='{{recipe.id}}'>Never ever!</button>
+        <form id='comments' action='/favrecipe/update' method='post'>
+          <input id='commentbox' type='text' name='comment'>
+          <input id='recipeid' type='hidden' name='recipeid' value='{{recipe.id}}'>
+          <button>submit notes</button>
+        </form>
       </td>
     </tr>
 
-    {{!-- <button id='addMeal'>Add To Weekly Meals</button> --}}
     {{/each}}
   </table>
 

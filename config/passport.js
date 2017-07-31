@@ -34,14 +34,17 @@ function localVerify(req, passportEmail, password, next) {
       console.log('err', err)
       return next(err) // go to failureRedirect
     }
+    if (!foundUser) {
+       return next(null, err, req.flash('message', 'User does not exist'));
+    }
     if (foundUser.validPassword(password)) {
       console.log('success, redirect to whatever router says')
       next(null, foundUser) // go to successRedirect
     }
     if (!foundUser.validPassword(password)) {
-      console.log('password error')
-      //to see error msg, need to set flash? and include flash in login page?
-      next(null, err) // goes to failureRedirect
+      next(null, err, req.flash('message', 'Oops! Wrong password!'));
+      //to set error msg using failureFlash
+      // next(null, err) // goes to failureRedirect
     }
   })
 }

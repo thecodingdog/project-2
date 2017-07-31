@@ -14,7 +14,7 @@ const recipeSchema = new Schema({
   cuisine : String,
   rating : Number,
   calories : Number,
-  cookingnotes: String,
+  cookingnotes: [],
   users: [{
     type: Schema.Types.ObjectId,
     ref: 'User'

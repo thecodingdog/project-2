@@ -4,6 +4,8 @@ const passport = require('../config/passport')
 
 // add to user only
 function add (req, res) {
+  //check if user is logged in
+if (req.isAuthenticated()){
   Recipe.create({
     serving: req.body.serving,
     timeDisplay: req.body.timeDisplay,
@@ -30,6 +32,8 @@ function add (req, res) {
     // console.log(req.user)
   })
 }
+else {res.send('user not logged in')}
+}
 
 // findAll for individual users
 function findAllById (req, res) {
@@ -51,7 +55,7 @@ function findAllById (req, res) {
         })
       })
   } else {
-    res.render('favrecipe')
+    res.render('favrecipe',{name: req.flash('name')})
   }
 }
 
@@ -61,15 +65,19 @@ function destroyAll (req, res) {
   res.redirect('/')
 }
 
-function update (req, res) {
-  console.log(req.body)
-  Recipe.findOneAndUpdate(
-  {_id: req.body.recipeid}, {cookingnotes: req.body.cookingnotes}, function (err) {
-    if (err)console.log(err)
-    res.redirect('/favrecipe')
-  })
+function updateNotes (req, res) {
+    console.log(req.body)
+    Recipe.find({
+      _id: req.body.recipeid
+    })
+    .exec(function(err,data){
+      console.log(data[0].cookingnotes)
+      data[0].cookingnotes.push(req.body.comment)
+      data[0].save()
+      res.redirect('/favrecipe')
+    })
 }
-// cookingnotes:req.body.notes
+
 function sumCalories (re, e, i) {
   return Math.floor(re + e.calories)
 }
@@ -103,6 +111,6 @@ module.exports = {
   add,
   findAllById,
   destroyAll,
-  update,
+  updateNotes,
   authenticateUser
 }

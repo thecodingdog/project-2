@@ -5,10 +5,10 @@ const passport = require('../config/passport')
 
 router.get('/', recipeController.authenticateUser, recipeController.findAllById)
 
-router.post('/add', recipeController.authenticateUser, recipeController.add)
+router.post('/add', recipeController.add)
 
 router.post('/removeAll', recipeController.destroyAll)
 
-router.post('/update', recipeController.update)
+router.post('/update', recipeController.updateNotes)
 
 module.exports = router

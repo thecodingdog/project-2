@@ -23,7 +23,6 @@ $(function () {
     var finalUrl = `${apiUrl}${query}${page}${start}`
     ajaxTextSearch(finalUrl, query)
     start += 8
-    // window.location = "/result"
   }
 
   function ajaxTextSearch (finalUrl, query) {
@@ -113,7 +112,7 @@ $(function () {
     // let $cuisine = (`<p>Cuisine: ${newRecipe.cuisine}`)
     let $rating = (`<p>Rating: <br><em>${newRecipe.rating}</em>`)
     let $calories = (`<p>Calories: <br><em>${calories}</em>`)
-    let $addBtn = $(`<button id='addBtn' class='enabled'>Add to My Meals</button>           <img src='/img/spinner.gif' id='spinner3'></img>
+    let $addBtn = $(`<button id='addBtn' class='enabled'>Add to My Meals</button><img src='/img/spinner.gif' id='spinner3'></img>
 `)
 
     $('#recipePageLeft').append($name, $image)
@@ -125,11 +124,15 @@ $(function () {
       e.preventDefault()
       $('#spinner3').fadeIn()
       $.post('/favrecipe/add', newRecipe).done(function (data) {
-        console.log(data)
-        if (data.status === 'ok') { alert('added to my meals!') }
-        $('#spinner3').fadeOut()
-        $('#addBtn').hide()
-        $('#mymeals').html('<span> New </span> - My Meals')
+        if (data.status === 'ok') {
+          alert('added to my meals!')
+          $('#spinner3').fadeOut()
+          $('#addBtn').hide()
+          $('#mymeals').html('<span> New </span> - My Meals')
+        } else {
+          alert(data)
+          window.location.href = '/userAuth/register'
+        }
 
         // $('#addBtn').removeClass('enabled')
       })
@@ -143,24 +146,7 @@ $(function () {
     })
   })
 
-  $('body').on('click', '#good', function () {
-    const editBtn = $(this)
-    const btnInfo = {
-      recipeid: editBtn[0].value,
-      cookingnotes: 'Was Really Good!'
-    }
-    $.post('/favrecipe/update', btnInfo, function () {
-      console.log('edited')
-    })
-  })
-  $('body').on('click', '#bad', function () {
-    const editBtn = $(this)
-    const btnInfo = {
-      recipeid: editBtn[0].value,
-      cookingnotes: 'Do Not Repeat this dish.'
-    }
-    $.post('/favrecipe/update', btnInfo, function () {
-      console.log('edited')
-    })
+  $('#comments').on('submit',function(){
+      console.log('saved')
   })
 })

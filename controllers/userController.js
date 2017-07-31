@@ -20,8 +20,10 @@ function create (req,res,next){
 }
 
 function authenticateUser (req,res,next) {
-  if (!req.isAuthenticated()) {return next()}
-  else {res.redirect('/favrecipe')}
+  if (!req.isAuthenticated()) {
+    return next() }
+  else {
+    res.redirect('/favrecipe')}
 }
 
 module.exports = {

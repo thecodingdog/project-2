@@ -1,3 +1,65 @@
+.is-dark {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.1),rgba(255, 255, 255, 0.1)),linear-gradient(rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.3)), url('/img/teapot background.jpeg');
+  background-size: cover;
+}
+
+span{
+  font-size: 120%;
+  text-decoration: underline;
+}
+
+body{
+  color: white;
+  font-size: 20px;
+}
+
+table{
+  margin-left: 30px;
+  margin-right: 30px;
+}
+
+th{
+  color: white;
+  background-color: black;
+}
+
+button{
+  margin: auto;
+  width: 300px;
+  color: #FFFFFF;
+  background: #3dd28d;
+  padding: 20px;
+  font:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: 20px;
+  cursor: pointer;
+}
+
+#good, #bad{
+  width:100%;
+  height:25px;
+  font-size: 12px;
+  color: black;
+}
+
+.buttons{
+  margin-top: 20px;
+  flex-wrap: wrap;
+  display: flex;
+  margin-bottom: 40px;
+}
+
+#delete{
+  position: absolute;
+  left: 1000px;
+  background-color: red;
+  display: block;
+}
+
+#logout{
+  display: block;
+}
+
+/*table template copied, not cleaned up yet*/
 body {
   background-color: #3e94ec;
   font-family: "Roboto", helvetica, arial, sans-serif;
@@ -139,65 +201,4 @@ td.text-center {
 
 td.text-right {
   text-align: right;
-}
-
-.is-dark {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.1),rgba(255, 255, 255, 0.1)),linear-gradient(rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.3)), url('/img/teapot background.jpeg');
-  background-size: cover;
-}
-
-span{
-  font-size: 120%;
-  text-decoration: underline;
-}
-
-body{
-  color: white;
-  font-size: 20px;
-}
-
-table{
-  margin-left: 30px;
-  margin-right: 30px;
-}
-
-th{
-  color: white;
-  background-color: black;
-}
-
-button{
-  margin: auto;
-  width: 300px;
-  color: #FFFFFF;
-  background: #3dd28d;
-  padding: 20px;
-  font:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  font-size: 20px;
-  cursor: pointer;
-}
-
-#good, #bad{
-  width:100%;
-  height:25px;
-  font-size: 12px;
-  color: black;
-}
-
-.buttons{
-  margin-top: 20px;
-  flex-wrap: wrap;
-  display: flex;
-  margin-bottom: 40px;
-}
-
-#delete{
-  position: absolute;
-  left: 1000px;
-  background-color: red;
-  display: block;
-}
-
-#logout{
-  display: block;
 }
