@@ -23,6 +23,8 @@ $(function () {
     var finalUrl = `${apiUrl}${query}${page}${start}`
     ajaxTextSearch(finalUrl, query)
     start += 8
+    history.pushState({querystring :query}, "title-1", "?page=searchresults")
+    // history.pushState({page: 2}, "title 2", "?page=2");
   }
 
   function ajaxTextSearch (finalUrl, query) {
@@ -68,13 +70,36 @@ $(function () {
     $.get(specificUrl).done(function (data) {
       console.log(data)
       displayRecipe(data)
+      history.pushState({specificquery: specific}, "title 2", "?page=onerecipe");
     })
+  }
+
+  // to handle back thru popstate (onhashchange doens't detect on pushstate)
+  // window.onpopstate = function(event){
+  //   console.log("location: " + document.location + ", state: " + JSON.stringify(event.state))
+  // }
+
+  window.onpopstate = function(){
+    $('#recipePageLeft').empty()
+    $('#recipePageRight').empty()
+    if (!window.history.state){
+      window.location.href = '/'
+    }
+    else {
+      let query = window.history.state.querystring
+      var finalUrl = `${apiUrl}${query}${page}${start}`
+      $('#searchResults').css('display', 'flex')
+      $('.hero-body').css('display', 'block')
+      $('.singleRecipeContainer').css('display', 'none')
+      ajaxTextSearch (finalUrl, query)
+    }
   }
 
   // callback to display recipe data in DOM
   function displayRecipe (data) {
-    $('#searchResults').remove()
-    $('.hero-body').remove()
+    $('#searchResults').css('display', 'none')
+    $('.hero-body').css('display', 'none')
+    $('.singleRecipeContainer').css('display', 'flex')
 
     // extracting calories
     let array = data.nutritionEstimates.map(function (e) {
@@ -97,6 +122,11 @@ $(function () {
       rating: data.rating,
       calories: calories[0]
     }
+    // building page structure
+    let $ingredientul = $("<ul class='ingredientList'></ul>")
+    $('#recipePageRight').append($ingredientul)
+    let $bottomleftDiv = $("<div id='bottomleft'></div>")
+    $('#recipePageLeft').append($bottomleftDiv)
 
     let $serving = (`<p><u>Servings: ${newRecipe.serving}</u>`)
     let $timeDisplay = (`<p>Time:<br> <em>${newRecipe.timeDisplay}</em>`)
@@ -149,4 +179,62 @@ $(function () {
   $('#comments').on('submit',function(){
       console.log('saved')
   })
+    var socket = io()
 })
+
+// // adding chat page, experimental
+// $(function () {
+//   var socket = io()
+//   $m = $('#m')
+//   $button = $('button')
+//   $chatform = $('#chatform')
+//   $chatform.on('submit', function (e) {
+//     e.preventDefault()
+//     console.log('submit through ajax')
+//     let msgVal = $m.val()
+//     console.log(msgVal)
+//     socket.emit('chat', msgVal)
+//   })
+//
+//   socket.on('chatServer', function (msgServer) {
+//     // alert(`new broadcast: ${msgServer}`)
+//     $('#message').append(`<li>${msgServer}</li>`)
+//   })
+//
+//   $name = $('#name')
+//   $nameform = $('#nameform')
+//   $nameform.on('submit', function (e) {
+//     e.preventDefault()
+//     let name = $name.val()
+//     console.log(name)
+//     socket.emit('username', name)
+//   })
+//
+//   socket.on('onlinestatus', function (data) {
+//     $('#message').append(`<li>${data}</li>`)
+//     // alert(`new broadcast: ${data}`)
+//   })
+//   socket.on('offlinestatus', function (data) {
+//     $('#message').append(`<li>${data}</li>`)
+//     // alert(`new broadcast: ${data}`)
+//   })
+//
+//   $isTyping = $('.hidden')
+//   var userTyping = setTimeout(function () {
+//     $isTyping.fadeOut()
+//   }, 500)
+//
+//   $m.on('keydown', function (e) {
+//     socket.emit('typing', 'userTyping')
+//   })
+//
+//   socket.on('stilltyping', function (message) {
+//     $('.hidden').text(message)
+//     // console.log(message);
+//     $isTyping.fadeIn()
+//     clearInterval(userTyping)
+//     userTyping = setTimeout(function () {
+//       $isTyping.fadeOut()
+//     }, 500)
+//   })
+// })

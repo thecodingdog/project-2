@@ -1,11 +1,12 @@
 {
   "name": "project-2",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "app.js",
   "repository": "https://github.com/wdi-sg/project-2.git",
   "author": "Prima Aulia Gusta <primaulia@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "@types/osmosis": "^1.0.0",
     "bcrypt": "^1.0.2",
     "body-parser": "^1.17.2",
     "connect-flash": "^0.1.1",
@@ -15,13 +16,23 @@
     "express-handlebars": "^3.0.0",
     "express-session": "^1.15.4",
     "flash": "^1.1.0",
+    "gulp": "^3.9.1",
+    "gulp-livereload": "^3.8.1",
+    "gulp-plumber": "^1.1.0",
+    "http": "^0.0.0",
+    "https": "^1.0.0",
     "mongo-connect": "^0.0.6",
     "mongoose": "^4.11.4",
     "nodemon": "^1.11.0",
+    "osmosis": "^1.1.4",
     "passport": "^0.3.2",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "socket.io": "^2.0.3"
   },
   "scripts": {
-    "start": "nodemon index"
+    "start": "nodemon app"
+  },
+  "devDependencies": {
+    "gulp-nodemon": "^2.2.1"
   }
 }
