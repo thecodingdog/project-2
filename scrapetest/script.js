@@ -19,7 +19,7 @@ mongoose.connect(murl, {
   }
 )
 
-var n = 1
+var n = 3
 var array = []
 
 // while (n < 2) {
