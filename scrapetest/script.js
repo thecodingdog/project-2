@@ -27,69 +27,60 @@ var url = `http://themeatmen.sg/recipes/page/${n}/`
 
 osmosis
     .get(url)
+    .find('.thumbnail')
     .set([
       osmosis
-      .find('.entry-title')
       .set({
-        title: 'a',
-        location: 'a@href'
+        location: 'a@href',
+        imgUrl: 'img@src',
+        insidepage:
+        osmosis
+        .follow('@href')
+        .set({ingredients: [
+          osmosis
+          .find('.recipe-ingredients > ol > li > p')
+        ],
+        instructions: [
+          osmosis
+          .find('.recipe-instructions > ol > li > p')
+        ],
+        servings: '.recipe-header > ul > li:nth-child(1) > h3',
+        time: '.recipe-header > ul > li:nth-child(2) > h3',
+        name: '.entry-title',
+        })
       })
-      // imgUrl: 'div.thumbnail > a > img@src'
     ])
-    // .follow('@href')
-    // .set({ingredients: [
-    //   osmosis
-    //   .find('.recipe-ingredients > ol > li > p')
-    // ],
-    //   instructions: [
-    //     osmosis
-    //   .find('.recipe-instructions > ol > li > p')
-    //   ],
-    //   servings: '.recipe-header > ul > li:nth-child(1) > h3',
-    //   time: '.recipe-header > ul > li:nth-child(2) > h3'
-    // })
     .data(
       data => {
         data.forEach(
           recipe => {
-            var newRecipe = new Recipe({
-              name: recipe.title,
+            // console.log(recipe);
+            Recipe.create({
+              name: recipe.insidepage.name,
+              imageUrl: recipe.imgUrl,
+              // imageUrlSmall: recipe.imageUrlSmall,
+              serving: recipe.insidepage.servings,
+              timeDisplay: recipe.insidepage.time,
+              ingredients: recipe.insidepage.ingredients,
+              instructions: recipe.insidepage.instructions,
               instructionsUrl: recipe.location
             })
-
-            newRecipe.save(function (err) {
-              if (err) console.log(err)
-
-              console.log('save new data')
-            })
-          }
-        )
-      }
-      // function (context, data, next, done) {
-      //   // console.log(listing)
-      //
-      //   // console.log('context', context)
-      //   // console.log('data', data, typeof data)
-      //
-      //   var newRecipe = new Recipe({
-      //     name: data.title,
-      //     instructionsUrl: data.location
-      //   })
-      //
-      //   newRecipe.save(function (err, savedRecipe) {
-      //     if (err) console.log(err)
-      //
-      //     console.log('saving data')
-      //   })
-      //
-      //   if (context.last) {
-      //     console.log('final scrape')
-      //     done()
-      //   } else {
-      //     console.log('save')
-      //     console.log(newRecipe)
-      //   }
-      //
+          })
+        })
+    //       recipe => {
+    //         var newRecipe = new Recipe({
+    //           name: recipe.title,
+    //           instructionsUrl: recipe.location
+    //         })
+    //
+    //         newRecipe.save(function (err) {
+    //           if (err) console.log(err)
+    //
+    //           console.log('save new data')
+    //         })
+    //       }
+    //     )
+    //   })
       //   // Recipe.create({
       //   //   // serving: listing.serving,
       //   //   timeDisplay: listing.time,
@@ -102,7 +93,7 @@ osmosis
       //   //   console.log('saved one recipe')
       //   // })
       // }
-    )
+
     // .log(console.log)
     .error(console.log)
     // .debug(console.log)

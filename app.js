@@ -50,15 +50,19 @@ app.use(passport.session()) // this must be below session call
 // setup all files that the proj needs to require
 const userRoute = require('./routes/userRoute')
 const recipeRoute = require('./routes/recipeRoute')
+const homeRoute = require('./routes/homeRoute')
+const ingredientRoute = require('./routes/ingredientRoute')
 
 // public routes
-app.get('/', function (req, res) {
+app.get('/search', function (req, res) {
   res.render('search')
 })
 
 // routes
+app.use('/home', homeRoute)
 app.use('/userAuth', userRoute)
 app.use('/favrecipe', recipeRoute)
+app.use('/ingredient', ingredientRoute)
 
 // opening the port
 const port = process.env.PORT || 4000

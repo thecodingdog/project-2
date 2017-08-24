@@ -25,27 +25,27 @@ th{
 
 button{
   margin: auto;
-  width: 300px;
+  width: 150px;
   color: #FFFFFF;
   background: #3dd28d;
-  padding: 20px;
+  /*padding: 20px;*/
   font:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   font-size: 20px;
   cursor: pointer;
 }
 
-#good, #bad{
+/*#good, #bad{
   width:100%;
   height:25px;
   font-size: 12px;
   color: black;
-}
+}*/
 
 .buttons{
-  margin-top: 20px;
+  /*margin-top: 20px;*/
   flex-wrap: wrap;
   display: flex;
-  margin-bottom: 40px;
+  /*margin-bottom: 40px;*/
 }
 
 #delete{
@@ -59,8 +59,26 @@ button{
   display: block;
 }
 
+#commentbox{
+  border: 4px solid rgba(0,0,0,0.1);
+	padding: 8px 10px;
+
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+
+	outline: 0;
+  cursor: pointer;
+}
+
+.content ul{
+  list-style: circle;
+}
+
+table is-bordered
+
 /*table template copied, not cleaned up yet*/
-body {
+/*body {
   background-color: #3e94ec;
   font-family: "Roboto", helvetica, arial, sans-serif;
   font-size: 16px;
@@ -201,4 +219,4 @@ td.text-center {
 
 td.text-right {
   text-align: right;
-}
+}*/

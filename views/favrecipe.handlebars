@@ -6,6 +6,24 @@
   Welcome back {{user.name}} !
 </h1>
 
+<div class="tabs is-boxed">
+  <ul>
+    <li class="is-active">
+      <a href='/favrecipe'>
+        <span class="icon is-small"><i class="fa fa-image"></i></span>
+        <span>Recipes</span>
+      </a>
+    </li>
+
+    <li>
+      <a href='/ingredient'>
+        <span class="icon is-small"><i class="fa fa-file-text-o"></i></span>
+        <span>Grocery List</span>
+      </a>
+    </li>
+  </ul>
+</div>
+
 <h2 class="subtitle is-4">
   <span> Total Consumption </span> <br>
   {{totalCalories}} <br>
@@ -18,39 +36,54 @@
 </div>
 </h2>
   <table>
-    <table class="table-fill">
+    {{!-- <table class="table-fill"> --}}
+    <table class="table is-bordered
+">
       <thread>
     <tr>
-      <th>Name</th>
-      <th>Calories</th>
-      <th>Time</th>
+      <th class="is-narrow">Name</th>
+      <th class = "is-narrow">Time / Calories</th>
+      {{!-- <th>Time</th> --}}
       <th>Ingredients Required</th>
       <th>Cook Notes</th>
-      <th> </th>
+      {{!-- <th> </th> --}}
     </tr>
   </thread>
 
     {{#each dbitems as |recipe|}}
     <tr>
-      <td class="text-left">{{recipe.name}}</td>
-      <td class='calories'>{{recipe.calories}}</td>
-      <td class="text-left">{{recipe.timeDisplay}}</td>
+      <td class="text-left">{{recipe.name}}
+        <form id='details' action='/home/one/{{recipe.id}}' method='get'>
+        <button>see recipe details</button>
+        </form>
+      </td>
+      {{!-- <td class='calories'>{{recipe.calories}}</td> --}}
+      <td class="text-left">{{recipe.timeDisplay}} {{#if recipe.calories}}
+        Calories: {{recipe.calories}}
+      {{/if}}</td>
       <td class="text-left">
         <ul>
+          <form action="/ingredient" method="post">
           {{#each recipe.ingredients as |ingredient|}}
-            <li> {{ingredient}} </li>
+          <li>
+            <input type="checkbox" name="ingredient" value="{{ingredient}}">
+             {{ingredient}}
+           </li>
           {{/each}}
+          <input type="submit" value="Submit">
+        </form>
         </ul>
       </td>
       <td class="text-left, cookingnotes">
-        {{recipe.cookingnotes}}
-      </td>
-      <td class='text-center'>
-        <form id='comments' action='/favrecipe/update' method='post'>
-          <input id='commentbox' type='text' name='comment'>
-          <input id='recipeid' type='hidden' name='recipeid' value='{{recipe.id}}'>
-          <button>submit notes</button>
-        </form>
+        {{recipe.cookingnotes}}<br/>
+        {{!-- <td class='text-center'> --}}
+          <form id='comments' action='/favrecipe/update' method='post'>
+            {{!-- <input id='commentbox' type="text" name='comment' placeholder="comment"> --}}
+            <textarea form ="comments" rows="10" name='comment' placeholder="comment"></textarea>
+            <input id='recipeid' type='hidden' name='recipeid' value='{{recipe.id}}'><br/>
+            <button>submit notes</button>
+          </form>
+        {{!-- </td> --}}
       </td>
     </tr>
 

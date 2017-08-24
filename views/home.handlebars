@@ -1,0 +1,14 @@
+{{!-- Page to display recipe scraped into DB --}}
+<link rel="stylesheet" type="text/css" href="/css/search.css">
+
+    <div id='searchResults' class='resultContainer'>
+        {{#each recipe}}
+          <div style="background-image: url({{this.imageUrl}})" data = "{{this.id}}" class = 'meat imgDisplay'>
+          <div class='textdiv'>
+            {{this.name}}
+          </div>
+        </div>
+        {{/each}}
+
+    </div>
+    <button id='next'>More Results</button>

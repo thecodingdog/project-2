@@ -2,6 +2,24 @@ const Recipe = require('../models/Recipe')
 const User = require('../models/User')
 const passport = require('../config/passport')
 
+function linkToUser(req,res){
+  if (req.isAuthenticated()){
+    console.log(req.body)
+    let currentuser = req.user
+    Recipe.findById({_id: req.body.id}, function(err,recipe){
+      if (err) console.log(err)
+      recipe.users.push(currentuser)
+      recipe.save
+      console.log(recipe)
+      currentuser.recipes.push(req.body.id)
+      currentuser.save()
+      console.log(currentuser)
+      res.send({status: 'ok'})
+    })
+  }
+  else {res.send('user not logged in')}
+}
+
 // add to user only
 function add (req, res) {
   //check if user is logged in
@@ -112,5 +130,6 @@ module.exports = {
   findAllById,
   destroyAll,
   updateNotes,
-  authenticateUser
+  authenticateUser,
+  linkToUser
 }

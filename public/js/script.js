@@ -177,8 +177,34 @@ $(function () {
   })
 
   $('#comments').on('submit',function(){
-      console.log('saved')
+      console.log(this)
   })
+
+  $('.meat').on('click', function(){
+    console.log($(this).attr('data'))
+    let imgid = $(this).attr('data')
+    $.get(`/home/one/${imgid}`).done(function (e) {
+      window.location.href = `/home/one/${imgid}`
+    })
+  })
+
+  $('#addBtn').on('click', function (e) {
+    let id = location.pathname.split('/').pop()
+    $('#spinner3').fadeIn()
+    $.post('/favrecipe/linkToUser', {'id':id}).done(function (data) {
+      if (data.status === 'ok') {
+        alert('added to my meals!')
+        $('#spinner3').fadeOut()
+        $('#addBtn').hide()
+        $('#mymeals').html('<span> New </span> - My Meals')
+      } else {
+        alert(data)
+        window.location.href = '/userAuth/register'
+      }
+    })
+  })
+
+
     var socket = io()
 })
 

@@ -1,0 +1,30 @@
+<link rel="stylesheet" type="text/css" href="/css/favrecipe.css">
+<h1 class="title is-2">
+  Welcome back {{user.name}} !
+</h1>
+
+<div class="tabs is-boxed">
+  <ul>
+    <li>
+      <a href='/favrecipe'>
+        <span class="icon is-small"><i class="fa fa-image"></i></span>
+        <span>Recipes</span>
+      </a>
+    </li>
+
+    <li class="is-active">
+      <a href='/ingredient'>
+        <span class="icon is-small"><i class="fa fa-file-text-o"></i></span>
+        <span>Grocery List</span>
+      </a>
+    </li>
+  </ul>
+</div>
+
+<div class="content">
+  <ul>
+    {{#each dbitems as |item|}}
+    <li>{{item.name}}</li>
+    {{/each}}
+  </ul>
+</div>

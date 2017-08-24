@@ -115,8 +115,13 @@ button{
   cursor: pointer;
   border: 1px;
   border-style: solid;
-
 }
+
+.meat {
+  width: 300px;
+  height: 200px;
+}
+
 
 #recipePageLeft{
     width: 600px;
@@ -130,4 +135,28 @@ span{
   text-decoration: underline;
   color: cyan;
   font-size: 120%;
+}
+
+.ingredientList{
+  padding: 2px;
+  margin-left: 5px;
+  font-size: 80%;
+}
+
+
+@media only screen and (max-width: 500px){
+     .imgDisplay .textdiv{
+       display: block;
+    }
+    .imgDisplay{
+      width: 300px;
+      height: 300px;
+    }
+    .nav-item{
+      font-size: 300%;
+    }
+
+    body{
+      background-color: blue;
+    }
 }
