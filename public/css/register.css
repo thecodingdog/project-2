@@ -4,7 +4,7 @@
 }
 
 body {
-  color: black;
+  color: #F3EFE6;
 }
 
 h1{
@@ -18,11 +18,11 @@ a {
   transition: .5s ease;
 }
 a:hover {
-  color: #FF1919;
+  color: #F1D1A0;
 }
 
 .form {
-  background: #fd974F;
+  background: #504D54;
   padding: 40px;
   max-width: 600px;
   margin: 40px auto;
@@ -52,12 +52,14 @@ a:hover {
   cursor: pointer;
   -webkit-transition: .5s ease;
   transition: .5s ease;
+  background: rgba(160, 179, 176, 0.25);
+  /*color: #a0b3b0;*/
 }
 .tab-group li a:hover {
-  background: #FF1919;
+  background: #F66957;
 }
 .tab-group .active a {
-  background: #c60000;
+  background: #F1D1A0;
 }
 
 .tab-content > div:last-child {
@@ -84,7 +86,7 @@ label {
 }
 label .req {
   margin: 2px;
-  color: #c60000;
+  color: #F1D1A0;
 }
 
 label.active {
@@ -98,7 +100,7 @@ label.active .req {
 }
 
 label.highlight {
-  color: #c60000;
+  color: #F1D1A0;
 }
 
 input, textarea {
@@ -152,14 +154,14 @@ textarea {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: .1em;
-  background: #FF1919;
-  /*color: #FF1919;*/
+  background: #F1D1A0;
+  /*color: #F1D1A0;*/
   -webkit-transition: all 0.5s ease;
   transition: all 0.5s ease;
   -webkit-appearance: none;
 }
 .button:hover, .button:focus {
-  background: #FF1919;
+  background: #F1D1A0;
 }
 
 .button-block {

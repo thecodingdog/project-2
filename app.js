@@ -69,7 +69,7 @@ app.use('/favrecipe', recipeRoute)
 app.use('/ingredient', ingredientRoute)
 
 // opening the port
-const port = process.env.PORT || 4000
+const port = process.env.PORT || 3000
 app.listen(port, function () {
   console.log(`express is running on ${port}`)
 })

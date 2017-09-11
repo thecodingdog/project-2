@@ -5,6 +5,7 @@ html {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  height: 100%;
 }
 
 .page{
@@ -12,13 +13,13 @@ html {
   box-shadow: 0 9px 0px 0px white, 0 -9px 0px 0px white, 12px 0 15px -4px rgba(19, 35, 47, 0.3), -12px 0 15px -4px rgba(19, 35, 47, 0.3);
   margin: 0 7%;
   background-color: white;
+  height: 100%;
 }
-
-html, .page { height:100%; }
 
 body {
   font-family: 'Lato', sans-serif;
   color: #545454;
+  height: 100%;
 }
 
 .header h1{
@@ -28,14 +29,14 @@ body {
   font-weight: 200;
   letter-spacing: 10px;
   text-align: center;
-  color: black;
+  color: #F66957;
   margin-bottom: 2px;
 }
 
 .tagline p{
   font-family: 'Caveat', cursive;
   padding: 0 26px;
-  color: #545454;
+  color: #F66957;
   text-align: center;
 }
 
@@ -52,3 +53,19 @@ body {
   font-family: 'Lato', sans-serif;
   color: #545454;
 }
+
+footer{
+  text-align: center;
+}
+
+.page:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+}
+
+div{
+overflow: auto;}

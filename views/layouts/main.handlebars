@@ -11,6 +11,7 @@
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Raleway" />
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Caveat" />
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Lato" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     {{!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"> --}}
     {{!-- <link rel="stylesheet" type="text/css" href="/css/bulma.css"> --}}
     <link rel="stylesheet" type="text/css" href="/css/main.css">
@@ -29,22 +30,26 @@
               </span>
               <div class="nav-right nav-menu"> --}}
               <div class ="nav">
-                
+
+                {{!-- <a class="nav-item" href=/home/all>
+                  Home
+                </a> --}}
+                <a class="nav-item" href=/search>
+                  Search
+                </a>
+                <a class="nav-item" href=/favrecipe id='mymeals'>
+                  Favourites
+                </a>
+                <a class="nav-item" href=/ingredient>
+                  Groceries
+                </a>
                 <a class="nav-item" href=/userAuth/login>
                   Login {{flash}}
                 </a>
                 <a class="nav-item" href=/userAuth/register>
                   Register
                 </a>
-                <a class="nav-item" href=/home/all>
-                  Home
-                </a>
-                <a class="nav-item" href=/search>
-                  Search
-                </a>
-                <a class="nav-item" href=/favrecipe id='mymeals'>
-                  My Meals
-                </a>
+
               </div>
               {{!-- </div>
             </div>
@@ -71,4 +76,31 @@
     {{!-- <script src="/socket.io/socket.io.js"></script> --}}
     <script src="/js/script.js" charset="utf-8"></script>
   </body>
+
+<footer>
+  <div class ="nav">
+
+    {{!-- <a class="nav-item" href=/home/all>
+      Home
+    </a> --}}
+    <a class="nav-item" href=/search>
+      Search
+    </a>
+    <a class="nav-item" href=/favrecipe id='mymeals'>
+      Favourites
+    </a>
+    <a class="nav-item" href=/ingredient>
+      Groceries
+    </a>
+    <a class="nav-item" href=/userAuth/login>
+      Login {{flash}}
+    </a>
+    <a class="nav-item" href=/userAuth/register>
+      Register
+    </a>
+
+  </div>
+  <a href="mailto:ngwanzhen@gmail.com"><p>&copy; thecodingdog</p></a>
+</footer>
+
   </html>
