@@ -47,7 +47,16 @@ function findAllById (req, res) {
   }
 }
 
+function deleteOne (req,res) {
+  Ingredient.findOneAndRemove({_id: req.body.id}, function(err,data){
+    if (err) console.log(err)
+    res.send({status : 'ok'})
+  })
+}
+
 module.exports = {
   add,
-  findAllById
+  findAllById,
+  deleteOne,
+  // deleteAll
 }

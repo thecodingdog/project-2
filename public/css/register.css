@@ -1,33 +1,28 @@
-.is-dark {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.1),rgba(255, 255, 255, 0.1)),linear-gradient(rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.3)), url('/img/onion background.jpeg');
-  background-size: cover;
-}
 
 *, *:before, *:after {
   box-sizing: border-box;
 }
 
-html {
-  overflow-y: scroll;
+body {
+  color: black;
 }
 
-body {
-  background: #c1bdba;
-  font-family: 'Titillium Web', sans-serif;
+h1{
+  font-size: 28px;
 }
 
 a {
   text-decoration: none;
-  color: #1ab188;
+  color: black;
   -webkit-transition: .5s ease;
   transition: .5s ease;
 }
 a:hover {
-  color: #179b77;
+  color: #FF1919;
 }
 
 .form {
-  background: rgba(19, 35, 47, 0.9);
+  background: #fd974F;
   padding: 40px;
   max-width: 600px;
   margin: 40px auto;
@@ -49,9 +44,8 @@ a:hover {
   display: block;
   text-decoration: none;
   padding: 15px;
-  background: rgba(160, 179, 176, 0.25);
-  color: #a0b3b0;
-  font-size: 20px;
+  color: black;
+  font-size: 32px;
   float: left;
   width: 50%;
   text-align: center;
@@ -60,12 +54,10 @@ a:hover {
   transition: .5s ease;
 }
 .tab-group li a:hover {
-  background: #179b77;
-  color: #ffffff;
+  background: #FF1919;
 }
 .tab-group .active a {
-  background: #1ab188;
-  color: #ffffff;
+  background: #c60000;
 }
 
 .tab-content > div:last-child {
@@ -74,7 +66,6 @@ a:hover {
 
 h1 {
   text-align: center;
-  color: #ffffff;
   font-weight: 300;
   margin: 0 0 40px;
 }
@@ -84,7 +75,7 @@ label {
   -webkit-transform: translateY(6px);
           transform: translateY(6px);
   left: 13px;
-  color: rgba(255, 255, 255, 0.5);
+  color: #805A3B;
   -webkit-transition: all 0.25s ease;
   transition: all 0.25s ease;
   -webkit-backface-visibility: hidden;
@@ -93,7 +84,7 @@ label {
 }
 label .req {
   margin: 2px;
-  color: #1ab188;
+  color: #c60000;
 }
 
 label.active {
@@ -107,7 +98,7 @@ label.active .req {
 }
 
 label.highlight {
-  color: #ffffff;
+  color: #c60000;
 }
 
 input, textarea {
@@ -118,19 +109,18 @@ input, textarea {
   padding: 5px 10px;
   background: none;
   background-image: none;
-  border: 1px solid #a0b3b0;
-  color: #ffffff;
+  border: 1px solid #545454;
   border-radius: 0;
   -webkit-transition: border-color .25s ease, box-shadow .25s ease;
   transition: border-color .25s ease, box-shadow .25s ease;
 }
 input:focus, textarea:focus {
   outline: 0;
-  border-color: #1ab188;
+  border-color: #c6000;
 }
 
 textarea {
-  border: 2px solid #a0b3b0;
+  border: 2px solid #805a3b;
   resize: vertical;
 }
 
@@ -156,20 +146,20 @@ textarea {
 .button {
   border: 0;
   outline: none;
-  border-radius: 0;
+  border-radius: 5px;
   padding: 15px 0;
-  font-size: 2rem;
+  font-size: 32px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: .1em;
-  background: #1ab188;
-  color: #ffffff;
+  background: #FF1919;
+  /*color: #FF1919;*/
   -webkit-transition: all 0.5s ease;
   transition: all 0.5s ease;
   -webkit-appearance: none;
 }
 .button:hover, .button:focus {
-  background: #179b77;
+  background: #FF1919;
 }
 
 .button-block {

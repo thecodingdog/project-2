@@ -204,6 +204,16 @@ $(function () {
     })
   })
 
+$('.deleteIngredients').on('click', function (e) {
+  // console.log($(this).val())
+  $(this).css('text-decoration', 'line-through')
+  $.post('/ingredient/deleteOne', {'id':$(this).val()}).done(function(data){
+    if (data.status === 'ok') {
+      console.log('deleted one');
+      // alert('deleted!')
+    }
+  })
+})
 
     var socket = io()
 })

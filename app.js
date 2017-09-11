@@ -58,6 +58,10 @@ app.get('/search', function (req, res) {
   res.render('search')
 })
 
+app.get('/', function (req, res) {
+  res.redirect('/home/all')
+})
+
 // routes
 app.use('/home', homeRoute)
 app.use('/userAuth', userRoute)

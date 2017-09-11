@@ -73,6 +73,22 @@ button{
 
 .content ul{
   list-style: circle;
+  color: white;
+  margin-left: 150px;
+}
+
+.content button {
+     background:none!important;
+     color:inherit;
+     border:none;
+     padding:0!important;
+     font: inherit;
+     /*border is optional*/
+     border-bottom:1px solid #444;
+     cursor: pointer;
+     width: 500px;
+     text-align: left;
+     display: inline-block;
 }
 
 table is-bordered
@@ -219,4 +235,4 @@ td.text-center {
 
 td.text-right {
   text-align: right;
-}*/
+}

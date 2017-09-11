@@ -24,7 +24,14 @@
 <div class="content">
   <ul>
     {{#each dbitems as |item|}}
-    <li>{{item.name}}</li>
+        {{#if item.name}}
+        <li>
+        <button class="deleteIngredients" value='{{item.id}}'>{{item.name}}</button>
+      </li>
+        {{/if}}
+
+      {{!-- <li>{{item.name}}</li> --}}
     {{/each}}
+  </form>
   </ul>
 </div>

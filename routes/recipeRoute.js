@@ -11,6 +11,8 @@ router.post('/removeAll', recipeController.destroyAll)
 
 router.post('/update', recipeController.updateNotes)
 
+router.post('/deleteOne', recipeController.deleteOne)
+
 router.post('/linkToUser', recipeController.linkToUser)
 
 module.exports = router

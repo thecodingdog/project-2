@@ -59,7 +59,7 @@ osmosis
               name: recipe.insidepage.name,
               imageUrl: recipe.imgUrl,
               // imageUrlSmall: recipe.imageUrlSmall,
-              serving: recipe.insidepage.servings,
+              serving: recipe.insidepage.servings.slice(10),
               timeDisplay: recipe.insidepage.time,
               ingredients: recipe.insidepage.ingredients,
               instructions: recipe.insidepage.instructions,

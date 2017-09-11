@@ -1,20 +1,21 @@
 const Recipe = require('../models/Recipe')
 const User = require('../models/User')
 const passport = require('../config/passport')
+const mongoose = require('mongoose')
 
+// need to create one instance of recipe for each user coz user notes are now shared!
 function linkToUser(req,res){
   if (req.isAuthenticated()){
-    console.log(req.body)
+    // console.log(req.body)
     let currentuser = req.user
-    Recipe.findById({_id: req.body.id}, function(err,recipe){
-      if (err) console.log(err)
-      recipe.users.push(currentuser)
-      recipe.save
-      console.log(recipe)
-      currentuser.recipes.push(req.body.id)
-      currentuser.save()
-      console.log(currentuser)
-      res.send({status: 'ok'})
+    Recipe.findById({_id: req.body.id}, function(err,copyRecipe){
+      copyRecipe._id = mongoose.Types.ObjectId()
+      copyRecipe.isNew = true
+      copyRecipe.users.push(currentuser)
+      copyRecipe.save()
+        currentuser.recipes.push(copyRecipe.id)
+        currentuser.save()
+        res.send({status: 'ok'})
     })
   }
   else {res.send('user not logged in')}
@@ -96,6 +97,15 @@ function updateNotes (req, res) {
     })
 }
 
+function deleteOne (req, res) {
+  Recipe.findOneAndRemove({
+    _id: req.body.recipeid
+  })
+  .exec(function(err,data){
+    res.redirect('/favrecipe')
+  })
+}
+
 function sumCalories (re, e, i) {
   return Math.floor(re + e.calories)
 }
@@ -130,6 +140,7 @@ module.exports = {
   findAllById,
   destroyAll,
   updateNotes,
+  deleteOne,
   authenticateUser,
   linkToUser
 }
