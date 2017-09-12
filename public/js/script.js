@@ -120,7 +120,7 @@ $(function () {
     let $divOne = $('<div class="one">')
     let $image = (`<img src=${newRecipe.image}>`)
     let $name = (`<p class="title">${newRecipe.name}`)
-    let $delIcon = ('<i class="material-icons">delete</i><br />')
+    let $delIcon = ('<i class="material-icons" id="addBtn">favorite</i><br />')
 
     let $divRow = $('<div class="onerow">')
     let $serving = (`<i class="material-icons">accessibility</i>${newRecipe.serving} ||`)
@@ -137,9 +137,9 @@ $(function () {
     $divOne.append($image, $name, $delIcon, $divRow, $ingredientul )
 
     $('#singleRecipeContainer').append($divOne)
-}
+
     // to add event listener to click button that doesn't exist
-    $('#recipePageRight').on('click', '#addBtn', function (e) {
+    $('#singleRecipeContainer').on('click', '#addBtn', function (e) {
       e.preventDefault()
       $('#spinner3').fadeIn()
       $.post('/favrecipe/add', newRecipe).done(function (data) {
@@ -155,7 +155,7 @@ $(function () {
         // $('#addBtn').removeClass('enabled')
       })
     })
-
+}
 
   $('#delete').on('click', function (e) {
     // e.preventDefault()
@@ -181,7 +181,7 @@ $(function () {
         alert('added to my meals!')
         $('#spinner3').fadeOut()
         $('#addBtn').hide()
-        $('#mymeals').html('<span> New </span> - My Meals')
+        $('#mymeals').html('<span> New </span>-Favourites')
       } else {
         alert(data)
         window.location.href = '/userAuth/register'

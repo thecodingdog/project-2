@@ -1,10 +1,29 @@
 {{!-- <h1>one recipe</h1> --}}
 
-<link rel="stylesheet" type="text/css" href="/css/search.css">
+<link rel="stylesheet" type="text/css" href="/css/featuredOne.css">
 
+<div class="item">
+  <img src="{{onerecipe.imageUrl}}">
+  <p class="title">{{onerecipe.name}}<i class="material-icons" id="addBtn">favorite</i></p>
 
+  <div class="row">
+    <i class="material-icons">accessibility</i>{{onerecipe.serving}} |
+    <i class="material-icons">alarm</i>{{onerecipe.timeDisplay}} |
+    <a href="{{onerecipe.instructionsUrl}}"><i class="material-icons">info</i>Direction</a>
+  </div>
+
+  <ul>
+    {{#each onerecipe.ingredients as |ingredient|}}
+    <li>
+       {{ingredient}}
+     </li>
+    {{/each}}
+  </ul>
+
+</div>
+{{!--
 <div class='singleRecipeContainer'>
-  <div id='recipePageLeft'>
+  <div id='onerecipePageLeft'>
     <div id = 'bottomleft'>
       <p>Time:<em>{{onerecipe.timeDisplay}}</em></p>
     </div>
@@ -36,4 +55,4 @@
       {{/each}}
     </ul>
     {{/if}}
-  </div>
+  </div> --}}
