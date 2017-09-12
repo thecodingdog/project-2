@@ -1,14 +1,155 @@
-{{!-- Page to display recipe scraped into DB --}}
+
 <link rel="stylesheet" type="text/css" href="/css/search.css">
 
-    <div id='searchResults' class='resultContainer'>
-        {{#each recipe}}
-          <div style="background-image: url({{this.imageUrl}})" data = "{{this.id}}" class = 'meat imgDisplay'>
-          <div class='textdiv'>
-            {{this.name}}
-          </div>
-        </div>
-        {{/each}}
+<div class="search">
+  <input class="search-box" type="text" placeholder="Chicken" name="query" id="inputBox" />
+  <i id="ingredientsSearch" class="material-icons">search</i>
+</div>
 
+<img src='/img/spinner.gif' id='spinner'></img>
+
+<div id='searchResults' class='resultContainer'></div>
+
+<div id='singleRecipeContainer'></div>
+
+<div class='featuredSection'>
+  <h4>----- Featured Recipes -----</h4>
+  <div class='featuredContainer'>
+  <div class="items">
+    <img src="{{recipe.[0].imageUrl}}" data={{recipe.[0].id}} class="featured">
+    <p class="title">{{recipe.[0].name}}</p><br />
+    <div class="row">
+      <i class="material-icons">grade</i>
+      Rating: {{recipe.[0].rating}} |
+      <i class="material-icons">alarm</i>{{recipe.[0].timeDisplay}}
     </div>
-    <button id='next'>More Results</button>
+  </div>
+
+  <div class="items quotes">
+    If music be the food of love, play on <br />~ William Shakespeare
+  </div>
+  <div class="items">
+    <img src="{{recipe.[1].imageUrl}}" data={{recipe.[1].id}} class="featured">
+    <p class="title">{{recipe.[1].name}}</p><br />
+    <div class="row">
+      <i class="material-icons">grade</i>
+      Rating: {{recipe.[1].rating}} |
+      <i class="material-icons">alarm</i>{{recipe.[1].timeDisplay}}
+    </div>
+  </div>
+
+  <div class="items quotes">
+    Your diet is a bank account. Good food choices are good investments. <br />~ Bethanny Frankel
+  </div>
+  <div class="items">
+    <img src="{{recipe.[2].imageUrl}}" data={{recipe.[2].id}} class="featured">
+    <p class="title">{{recipe.[2].name}}</p><br />
+    <div class="row">
+      <i class="material-icons">grade</i>
+      Rating: {{recipe.[2].rating}} |
+      <i class="material-icons">alarm</i>{{recipe.[2].timeDisplay}}
+    </div>
+  </div>
+
+  <div class="items quotes">
+    There is no sincere love than the love of food <br />~ George Bernard Shaw
+  </div>
+  <div class="items">
+    <img src="{{recipe.[3].imageUrl}}" data={{recipe.[3].id}} class="featured">
+    <p class="title">{{recipe.[3].name}}</p><br />
+    <div class="row">
+      <i class="material-icons">grade</i>
+      Rating: {{recipe.[3].rating}} |
+      <i class="material-icons">alarm</i>{{recipe.[3].timeDisplay}}
+    </div>
+  </div>
+
+  <div class="items">
+    <img src="{{recipe.[4].imageUrl}}" data={{recipe.[4].id}} class="featured">
+    <p class="title">{{recipe.[4].name}}</p><br />
+    <div class="row">
+      <i class="material-icons">grade</i>
+      Rating: {{recipe.[4].rating}} |
+      <i class="material-icons">alarm</i>{{recipe.[4].timeDisplay}}
+    </div>
+  </div>
+
+  <div class="items quotes">
+    If you can’t feed a hundred people, then feed just one <br />~ Mother Theresa
+  </div>
+  <div class="items">
+    <img src="{{recipe.[5].imageUrl}}" data={{recipe.[5].id}} class="featured">
+    <p class="title">{{recipe.[5].name}}</p><br />
+    <div class="row">
+      <i class="material-icons">grade</i>
+      Rating: {{recipe.[5].rating}} |
+      <i class="material-icons">alarm</i>{{recipe.[5].timeDisplay}}
+    </div>
+  </div>
+
+  <div class="items quotes">
+    Cooking is all about people. Food is maybe the only universal thing that really has the power to bring everyone together. No matter what culture, everywhere around the world, people get together to eat. <br />~ Guy Fieri
+  </div>
+  <div class="items">
+    <img src="{{recipe.[6].imageUrl}}" data={{recipe.[6].id}} class="featured">
+    <p class="title">{{recipe.[6].name}}</p><br />
+    <div class="row">
+      <i class="material-icons">grade</i>
+      Rating: {{recipe.[6].rating}} |
+      <i class="material-icons">alarm</i>{{recipe.[6].timeDisplay}}
+    </div>
+  </div>
+
+  <div class="items quotes">
+    Let food be thy medicine and medicine be thy food <br />~ Hippocrates
+  </div>
+  <div class="items">
+    <img src="{{recipe.[7].imageUrl}}" data={{recipe.[7].id}} class="featured">
+    <p class="title">{{recipe.[7].name}}</p><br />
+    <div class="row">
+      <i class="material-icons">grade</i>
+      Rating: {{recipe.[7].rating}} |
+      <i class="material-icons">alarm</i>{{recipe.[7].timeDisplay}}
+    </div>
+  </div>
+
+  <div class="items quotes">
+    One cannot think well, love well, sleep well, if one has not dined well <br />~ Virginia Woolf
+  </div>
+  <div class="items">
+    <img src="{{recipe.[8].imageUrl}}" data={{recipe.[8].id}} class="featured">
+    <p class="title">{{recipe.[8].name}}</p><br />
+    <div class="row">
+      <i class="material-icons">grade</i>
+      Rating: {{recipe.[8].rating}} |
+      <i class="material-icons">alarm</i>{{recipe.[8].timeDisplay}}
+    </div>
+  </div>
+
+  <div class="items quotes">
+    Wine is bottled poetry <br />~ Robert Louis Stevenson
+  </div>
+  <div class="items">
+    <img src="{{recipe.[9].imageUrl}}" data={{recipe.[9].id}} class="featured">
+    <p class="title">{{recipe.[9].name}}</p><br />
+    <div class="row">
+      <i class="material-icons">grade</i>
+      Rating: {{recipe.[9].rating}} |
+      <i class="material-icons">alarm</i>{{recipe.[9].timeDisplay}}
+    </div>
+  </div>
+
+  <div class="items quotes">
+    You better cut the pizza in four pieces because I’m not hungry enough to eat six <br />~ Yogi Berra
+  </div>
+    <div class="items">
+      <img src="{{recipe.[10].imageUrl}}" data={{recipe.[10].id}} class="featured">
+      <p class="title">{{recipe.[10].name}}</p><br />
+      <div class="row">
+        <i class="material-icons">grade</i>
+        Rating: {{recipe.[10].rating}} |
+        <i class="material-icons">alarm</i>{{recipe.[10].timeDisplay}}
+      </div>
+    </div>
+  </div>
+</div>

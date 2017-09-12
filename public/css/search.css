@@ -1,6 +1,58 @@
-.is-dark {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.1),rgba(255, 255, 255, 0.1)),linear-gradient(rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.3)), url('/img/background.jpeg');
-  background-size: cover;
+/*search bar*/
+.search{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 15px 6px 30px;
+  margin: 60px;
+  height: 10%;
+  border-radius: 30px;
+  background-color: rgba(232,202,155,0.4);
+  color: white;
+}
+
+input#inputBox.search-box{
+  border-style: none;
+  background-color: rgba(232,202,155,0);
+  font-size: 2rem;
+  text-align: center;
+  color: white;
+}
+
+.material-icons{
+  font-size: 2rem;
+}
+
+#ingredientsSearch{
+  cursor: pointer;
+}
+
+#inputBox:focus {
+    /*background-color: black;*/
+    outline: none;
+    border-style: none;
+    /*color: #545454;*/
+    width: 100%;
+}
+
+h4{
+  text-align: center;
+  font-size: 2rem;
+  margin: 20px auto;
+  font-family: 'Montserrat', sans-serif;
+  text-transform: uppercase;
+  font-weight: 400;
+  line-height: 1.1;
+  display: block;
+  width: 100%;
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+  color: #545454;
+  display: inline-flex;
+  vertical-align: middle;
 }
 
 #spinner{
@@ -11,17 +63,42 @@
   display: none;
 }
 
-#next{
+/*for search results*/
+.imgDisplay img{
+  max-height: 200px;
+}
+
+.imgDisplay p{
+  margin: 2px;
+}
+
+.imgDisplay {
+    background-color: #eee;
+    display: inline-block;
+    margin-top: 20px;
+    margin-right: 25px;
+    text-align: center;
+}
+
+.resultContainer{
+  column-count: 4;
+  column-gap: 1em;
+  margin: 10px 150px;
+  border-bottom: 1px solid #545454;
+  /*display: flex;*/
+}
+
+/*#next{
   display: none;
   margin: auto;
   width: 600px;
   color: #FFFFFF;
   background: #3dd28d;
   height: 30px;
-  padding: 20px;
-  font:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  font-size: 30px;
-  cursor: pointer;
+  padding: 20px;*/
+  /*font:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: 30px;*/
+  /*cursor: pointer;
 }
 
 .imgDisplay .textdiv{
@@ -32,46 +109,94 @@
 .imgDisplay:hover .textdiv{
   background-color: rgba(0,0,0,0.6);
   display: block;
+}*/
+
+
+/*for single recipe*/
+.one { /* Masonry bricks or child elements */
+    background-color: #eee;
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    margin: 10px 250px;
+    border-bottom: 1px solid #545454;
+    font-size: 1.5rem;
+    padding: 20px
 }
 
-body{
-  font-size: 24px;
-  color: black;
+.one .material-icons{
+  font-size: 1.5rem;
 }
 
-h1{
-  font-size: 120%;
-
+.one p{
+  font-size: 2.0rem;
 }
 
-.resultContainer{
-  margin-top: 40px;
-  margin-bottom: 40px;
-  margin-left: 100px;
-  margin-right: 100px;
-  display: flex;
-  flex-wrap: wrap;
+.one img{
+  max-width: 40%;
+  max-height: 40%;
+  border-radius: 15px;
+  display: block;
+  margin: 0 auto;
 }
 
-.singleRecipeContainer{
+ul {
+  /*text-align: left;
+  padding: 2px;*/
+  list-style-type: circle;
+}
+
+li {
+  text-align: left;
+  /*margin-left: 0;*/
+}
+
+.one.title{
+  font-size: 2.0rem;
+  display: inline;
+  vertical-align: middle;
+}
+
+.onerow{
+  line-height: 20px;
+  display: inline;
+  vertical-align: middle;
+  margin: 2px auto;
+  border-top: 1px solid #545454;
+  border-bottom: 1px solid #545454;
+  padding: 5px 1px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/*.masonry {
+    column-count: 4;
+    column-gap: 1em;
+    margin: 2px 20px;
+    border-bottom: 1px solid #545454;
+}*/
+
+
+/*.singleRecipeContainer{
   display:table;
   position: relative;
   top: 40px;
   margin-top: 40px;
   margin-bottom: 0px;
   margin-left: 100px;
-  margin-right: 100px;
+  margin-right: 100px;*/
   /*display: flex;*/
   /*flex-wrap: wrap;*/
   /*align-items: flex-start;*/
   /*justify-content: flex-start;*/
-  background-color:rgba(0, 0, 0, 0.7);
+  /*background-color:rgba(0, 0, 0, 0.7);
   color: #FFFFFF;
   padding: 20px;
   border-radius: 10px;
   border-style: solid;
   border: 1px;
 }
+
 #recipePageLeft, #recipePageRight {
     display: table-cell
 }
@@ -80,56 +205,40 @@ h1{
 }
 #recipePageRight{
   width: 600px;
-}
+}*/
 /*#bottomleft{
   position: relative;
   bottom: 0
 }*/
-#bottomleft p{
+/*#bottomleft p{
   display: inline-block;
   width: 150px;
   font-size: 18px;
-}
+}*/
 
-
-
-button{
-  /*margin: auto;*/
+/*button{
+  margin: auto;
   width: 200px;
   height: 25px;
   color: #FFFFFF;
   background: #3dd28d;
-  padding: 20px;
-  font:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  font-size: 20px;
-  cursor: pointer;
+  padding: 20px;*/
+  /*font:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: 20px;*/
+  /*cursor: pointer;
   line-height: 10px;
-}
+}*/
 
-.imgDisplay{
-  margin-top: 10px;
-  margin-right: 10px;
-  width: 300px;
-  height: 300px;
-  background-size: cover;
-  cursor: pointer;
-  border: 1px;
-  border-style: solid;
-}
 
-.meat {
+
+/*.meat {
   width: 300px;
   height: 200px;
-}
+}*/
 
-
-#recipePageLeft{
+/*#recipePageLeft{
     width: 600px;
-}
-
-li{
-  list-style: circle;
-}
+}*/
 
 span{
   text-decoration: underline;
@@ -137,14 +246,7 @@ span{
   font-size: 120%;
 }
 
-.ingredientList{
-  padding: 2px;
-  margin-left: 5px;
-  font-size: 80%;
-}
-
-
-@media only screen and (max-width: 500px){
+/*@media only screen and (max-width: 500px){
      .imgDisplay .textdiv{
        display: block;
     }
@@ -159,4 +261,61 @@ span{
     body{
       background-color: blue;
     }
+}*/
+
+/*for featured recipe and quotes*/
+.featuredContainer {
+  column-count: 4;
+  column-gap: 1em;
+  margin: 10px 20px;
+  border-bottom: 1px solid #545454;
+}
+
+img {
+  margin: 2%;
+  width: 90%;
+  border-radius: 2px;
+}
+
+.title{
+  font-size: 1.2rem;
+  display: inline;
+  vertical-align: middle;
+}
+
+.featuredContainer .row{
+  line-height: 20px;
+  display: inline-flex;
+  vertical-align: middle;
+  justify-content: center;
+  margin: 2px auto;
+  border-top: 1px solid #545454;
+  border-bottom: 1px solid #545454;
+  padding: 8px 1px;
+  width: 100%;
+  word-spacing: 5px;
+}
+
+.material-icons{
+  font-size: 1.0rem;
+}
+
+.featured{
+  cursor: pointer;
+}
+
+.items{
+  background-color: #eee;
+  display: inline-block;
+  margin: 0 0 1em;
+  width: 100%;
+  text-align: center;
+}
+
+.quotes{
+  text-align: left;
+  font-family: 'Arial', Helvetica, sans-serif;
+  font-size: 1em;
+  padding: 5px 1px;
+
 }

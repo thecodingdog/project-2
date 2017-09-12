@@ -1,45 +1,50 @@
-{{!-- Page for search by ingredients, time, etc.
-Upon clicking search, results show up, search boxes disspear
-Upon clicking on pictures, recipe shows up --}}
+
 <link rel="stylesheet" type="text/css" href="/css/search.css">
 
-{{flash}}
-    <div class="hero-body">
-      <div class="container has-text-centered">
-        <div class="columns is-vcentered">
-          <div class="column is-5">
-            <figure class="image is-4by3">
-              <img src="https://lh3.googleusercontent.com/T0Yba02cZ6Sr8IIHoh-X1ysw1hJ2VpNZZ4HRVi5MEqA9jSP9SRd0EaK26ilGvfMod_gkCWx1fnne1bVoFTqMpw=s730-e365" class="promo-img" alt="Description">
-            </figure>
-          </div>
-          <div class="column is-6 is-offset-1">
-            <h1 class="title is-2">
-              Start Cooking Now
-            </h1>
-            <h2 class="subtitle is-4">
-              It's time to take charge of your meals.
-            </h2>
-            <br>
-            <p class="control has-addons has-text-centered">
-              <input class="input is-expanded is-large" type="text" placeholder="Chicken" name="query" id="inputBox">
-              <button id='ingredientsSearch' class="button is-large is-danger is-outlined">
-                Search
-              </button>
-              <img src='/img/spinner.gif' id='spinner'></img>
-            </p>
-          </div>
-        </div>
-      </div>
+  <div class="search">
+    <input class="search-box" type="text" placeholder="Chicken" name="query" id="inputBox" />
+    <i id="ingredientsSearch" class="material-icons">search</i>
+  </div>
+
+  <img src='/img/spinner.gif' id='spinner'></img>
+
+  <div id='searchResults' class='resultContainer'>
+    <div class="quotes">
+      If music be the food of love, play on. - William Shakespeare
+    </div>
+    <div class="quotes">
+      Your diet is a bank account. Good food choices are good investments. - Bethanny Frankel
+    </div>
+    <div class="quotes">
+      There is no sincere love than the love of food - George Bernard Shaw
+    </div>
+    <div class="quotes">
+      If you can’t feed a hundred people, then feed just one - Mother Theresa
+    </div>
+    <div class="quotes">
+      Cooking is all about people. Food is maybe the only universal thing that really has the power to bring everyone together. No matter what culture, everywhere around the world, people get together to eat. - Guy Fieri
+    </div>
+    <div class="quotes">
+      Let food be thy medicine and medicine be thy food - Hippocrates
+    </div>
+    <div class="quotes">
+      One cannot think well, love well, sleep well, if one has not dined well - Virginia Woolf
+    </div>
+    <div class="quotes">
+      Wine is bottled poetry - Robert Louis Stevenson
+    </div>
+    <div class="quotes">
+      You better cut the pizza in four pieces because I’m not hungry enough to eat six - Yogi Berra
     </div>
 
-    <div id='searchResults' class='resultContainer'>
-    </div>
-    <button id='next'>More Results</button>
+  </div>
 
-      <div class='singleRecipeContainer'>
+  <button id='next'>More Results</button>
+
+  <div class='singleRecipeContainer'>
         <div id='recipePageLeft'>
         </div>
         <div id='recipePageRight'>
         </div>
         <img src='/img/spinner.gif' id='spinner'></img>
-      </div>
+  </div>

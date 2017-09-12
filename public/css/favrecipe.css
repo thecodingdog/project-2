@@ -46,7 +46,6 @@ img {
   text-overflow: ellipsis;
 }
 
-
 .masonry { /* Masonry container */
     column-count: 4;
     column-gap: 1em;
@@ -104,20 +103,6 @@ span{
   background-color: red;
   color: white;
 }
-
-
-
-/*.deleteAll:after {
-    visibility: hidden;
-    display: block;
-    font-size: 0;
-    content: " ";
-    clear: both;
-    height: 0;
-}
-
-div{
-overflow: auto;}*/
 
 #commentbox{
   font-size: 1rem;
