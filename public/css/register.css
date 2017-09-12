@@ -8,7 +8,10 @@ body {
 }
 
 h1{
-  font-size: 28px;
+  font-size: 20px;
+  font-family: 'Lato', sans-serif;
+  color: #504D54;
+  margin-bottom: 5px;
 }
 
 a {
@@ -18,22 +21,28 @@ a {
   transition: .5s ease;
 }
 a:hover {
-  color: #F1D1A0;
+  color: #F66957;
 }
 
 .form {
-  background: #504D54;
+  /*background: #504D54;*/
+  background: #F3EFE6;
   padding: 40px;
-  max-width: 600px;
+  max-width: 400px;
   margin: 40px auto;
   border-radius: 4px;
   box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3);
+  font-family: 'Lato', sans-serif;
+}
+
+#register{
+  margin-top: 0px;
 }
 
 .tab-group {
   list-style: none;
   padding: 0;
-  margin: 0 0 40px 0;
+  margin: 0 0 20px 0;
 }
 .tab-group:after {
   content: "";
@@ -42,10 +51,11 @@ a:hover {
 }
 .tab-group li a {
   display: block;
+  /*margin-bottom: 0;*/
   text-decoration: none;
   padding: 15px;
   color: black;
-  font-size: 32px;
+  font-size: 20px;
   float: left;
   width: 50%;
   text-align: center;
@@ -56,10 +66,11 @@ a:hover {
   /*color: #a0b3b0;*/
 }
 .tab-group li a:hover {
-  background: #F66957;
+  background: #F1D1A0;
+  /*background: #F66957;*/
 }
 .tab-group .active a {
-  background: #F1D1A0;
+  background: #F66957;
 }
 
 .tab-content > div:last-child {
@@ -68,7 +79,7 @@ a:hover {
 
 h1 {
   text-align: center;
-  font-weight: 300;
+  /*font-weight: 300;*/
   margin: 0 0 40px;
 }
 
@@ -82,11 +93,11 @@ label {
   transition: all 0.25s ease;
   -webkit-backface-visibility: hidden;
   pointer-events: none;
-  font-size: 22px;
+  font-size: 20px;
 }
 label .req {
   margin: 2px;
-  color: #F1D1A0;
+  color: #F66957;
 }
 
 label.active {
@@ -100,25 +111,25 @@ label.active .req {
 }
 
 label.highlight {
-  color: #F1D1A0;
+  color: #F66957;
 }
 
 input, textarea {
-  font-size: 22px;
+  font-size: 20px;
   display: block;
   width: 100%;
   height: 150%;
   padding: 5px 10px;
   background: none;
   background-image: none;
-  border: 1px solid #545454;
+  border: 1px solid #F1D1A0;
   border-radius: 0;
   -webkit-transition: border-color .25s ease, box-shadow .25s ease;
   transition: border-color .25s ease, box-shadow .25s ease;
 }
 input:focus, textarea:focus {
-  outline: 0;
-  border-color: #c6000;
+  outline: 5;
+  border-color: #c60000;
 }
 
 textarea {
@@ -150,23 +161,24 @@ textarea {
   outline: none;
   border-radius: 5px;
   padding: 15px 0;
-  font-size: 32px;
-  font-weight: 600;
+  font-size: 20px;
+  /*font-weight: 600;*/
   text-transform: uppercase;
-  letter-spacing: .1em;
-  background: #F1D1A0;
-  /*color: #F1D1A0;*/
+  /*letter-spacing: .1em;*/
+  background: #F66957;
+  /*color: #F66957;*/
   -webkit-transition: all 0.5s ease;
   transition: all 0.5s ease;
   -webkit-appearance: none;
 }
 .button:hover, .button:focus {
-  background: #F1D1A0;
+  background: #F66957;
 }
 
 .button-block {
   display: block;
   width: 100%;
+  text-transform: capitalize;
 }
 
 .forgot {

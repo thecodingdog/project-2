@@ -11,16 +11,16 @@
     <div class="item">
 
       <img src="{{recipe.imageUrl}}">
-      {{recipe.name}}
+      <p class="title">{{recipe.name}}</p>
       <form class='delete' action='/favrecipe/deleteOne' method='post'>
         <input class='recipeid' type='hidden' name='recipeid' value='{{recipe.id}}'>
         <button class="delete"><i class="material-icons">delete</i></button>
-      </form>
+      </form><br />
 
       <div class="row">
-        <i class="material-icons">accessibility</i>{{recipe.serving}} ||
-        <i class="material-icons">alarm</i>{{recipe.timeDisplay}} ||
-        <a href="{{recipe.instructionsUrl}}"><i class="material-icons">info</i>Steps</a>
+        <i class="material-icons">accessibility</i>{{recipe.serving}} |
+        <i class="material-icons">alarm</i>{{recipe.timeDisplay}} |
+        <a href="{{recipe.instructionsUrl}}"><i class="material-icons">info</i>Direction</a>
       </div>
 
       <ul>
@@ -36,7 +36,7 @@
       </ul>
 
       <div class="cookingnotes">
-        My Notes: {{recipe.cookingnotes}}<br/>
+        Comments: <span>{{recipe.cookingnotes}}</span><br/>
           <form class='comments' action='/favrecipe/update' method='post'>
             <input id='commentbox' type="text" name='comment' placeholder="comment">
             <input class='recipeid' type='hidden' name='recipeid' value='{{recipe.id}}'>
@@ -46,11 +46,13 @@
 
   </div>
   {{/each}}
-
-<div class=buttons>
-  <form action='/favrecipe/removeAll' method=post class='delete'>
-    <button id=delete>DELETE ALL RECIPES</button>
-  </form>
-
-  <a href='/userAuth/logout'><button id='logout'>LOG OUT</button></a>
 </div>
+
+<div class="deleteAll">
+  <form action='/favrecipe/removeAll' method=post class='deleteAll'>
+    <button id=delete class="deleteAll">Delete All<i class="material-icons deleteAll">delete_sweep</i></button>
+  </form>
+</div>
+
+
+  {{!-- <a href='/userAuth/logout'><button id='logout'>LOG OUT</button></a> --}}

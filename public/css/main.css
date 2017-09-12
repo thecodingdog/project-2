@@ -8,11 +8,14 @@ html {
   height: 100%;
 }
 
-.page{
+.page, footer{
   box-shadow: 12px 0 15px -4px rgba(19, 35, 47, 0.3), -12px 0 8px -4px rgba(19, 35, 47, 0.3);
   box-shadow: 0 9px 0px 0px white, 0 -9px 0px 0px white, 12px 0 15px -4px rgba(19, 35, 47, 0.3), -12px 0 15px -4px rgba(19, 35, 47, 0.3);
   margin: 0 7%;
   background-color: white;
+}
+
+.page{
   height: 100%;
 }
 
@@ -20,6 +23,10 @@ body {
   font-family: 'Lato', sans-serif;
   color: #545454;
   height: 100%;
+}
+
+a:hover {
+  color: #F66957;
 }
 
 .header h1{
@@ -30,14 +37,21 @@ body {
   letter-spacing: 10px;
   text-align: center;
   color: #F66957;
+  margin-top: 40px;
   margin-bottom: 2px;
+  cursor: pointer;
+}
+
+.header a {
+  color: #F66957;
 }
 
 .tagline p{
+  margin-top: 0;
   font-family: 'Caveat', cursive;
-  padding: 0 26px;
   color: #F66957;
   text-align: center;
+  font-size: 2em;
 }
 
 .nav {
@@ -56,6 +70,8 @@ body {
 
 footer{
   text-align: center;
+  display: block;
+  border-top: 1px solid #545454;
 }
 
 .page:after {

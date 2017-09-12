@@ -1,37 +1,20 @@
-<link rel="stylesheet" type="text/css" href="/css/favrecipe.css">
-<h1 class="title is-2">
+<link rel="stylesheet" type="text/css" href="/css/groceries.css">
+<h4>
   Welcome back {{user.name}} !
-</h1>
-
-<div class="tabs is-boxed">
-  <ul>
-    <li>
-      <a href='/favrecipe'>
-        <span class="icon is-small"><i class="fa fa-image"></i></span>
-        <span>Recipes</span>
-      </a>
-    </li>
-
-    <li class="is-active">
-      <a href='/ingredient'>
-        <span class="icon is-small"><i class="fa fa-file-text-o"></i></span>
-        <span>Grocery List</span>
-      </a>
-    </li>
-  </ul>
-</div>
+</h4>
 
 <div class="content">
-  <ul>
+  <ul class="rounded-list">
     {{#each dbitems as |item|}}
         {{#if item.name}}
         <li>
-        <button class="deleteIngredients" value='{{item.id}}'>{{item.name}}</button>
+        <span>
+          <button class="deleteIngredients" value='{{item.id}}'>{{item.name}}</button>
+          </span>
       </li>
         {{/if}}
 
       {{!-- <li>{{item.name}}</li> --}}
     {{/each}}
-  </form>
   </ul>
 </div>

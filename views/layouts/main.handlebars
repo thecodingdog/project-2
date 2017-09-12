@@ -19,7 +19,7 @@
   <body>
     <div class="page">
       <div class="header">
-        <h1>PLENTIFUL</h1>
+        <h1><a href='/search'>PLENTIFUL</a></h1>
         <div class="tagline"><p>==Your Recipe Diary==</p></div>
       </div>
       {{!-- <div class="hero-head">
@@ -44,11 +44,11 @@
                   Groceries
                 </a>
                 <a class="nav-item" href=/userAuth/login>
-                  Login {{flash}}
+                  Login/Register {{flash}}
                 </a>
-                <a class="nav-item" href=/userAuth/register>
+                {{!-- <a class="nav-item" href=/userAuth/register>
                   Register
-                </a>
+                </a> --}}
 
               </div>
               {{!-- </div>
@@ -78,12 +78,8 @@
   </body>
 
 <footer>
-  <div class ="nav">
-
-    {{!-- <a class="nav-item" href=/home/all>
-      Home
-    </a> --}}
-    <a class="nav-item" href=/search>
+  {{!-- <div class ="nav"> --}}
+    {{!-- <a class="nav-item" href=/search>
       Search
     </a>
     <a class="nav-item" href=/favrecipe id='mymeals'>
@@ -93,13 +89,9 @@
       Groceries
     </a>
     <a class="nav-item" href=/userAuth/login>
-      Login {{flash}}
-    </a>
-    <a class="nav-item" href=/userAuth/register>
-      Register
-    </a>
-
-  </div>
+      Login/Register {{flash}}
+    </a> --}}
+  {{!-- </div> --}}
   <a href="mailto:ngwanzhen@gmail.com"><p>&copy; thecodingdog</p></a>
 </footer>
 
