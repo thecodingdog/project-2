@@ -33,6 +33,7 @@ $(function () {
       $spinner.fadeOut()
       $('#next').css('display', 'inline-block')
       $('#searchResults').empty()
+      $('.searchback').remove()
       $('.featuredSection').empty()
       let results = data.matches
       // console.log(results)
@@ -85,8 +86,8 @@ $(function () {
   // }
 
   window.onpopstate = function(){
-    $('#recipePageLeft').empty()
-    $('#recipePageRight').empty()
+    // $('#recipePageLeft').empty()
+    // $('#recipePageRight').empty()
     if (!window.history.state){
       window.location.href = '/'
     }
@@ -103,7 +104,9 @@ $(function () {
   // callback to display recipe data in DOM
   function displayRecipe (data) {
     $('#searchResults').css('display', 'none')
-    $('.search').css('display', 'none')
+    $('.searchback').remove()
+
+    // $('.search').css('display', 'none')
     $('#singleRecipeContainer').css('display', 'flex')
 
     let newRecipe = {
@@ -119,8 +122,8 @@ $(function () {
 
     let $divOne = $('<div class="one">')
     let $image = (`<img src=${newRecipe.image}>`)
-    let $name = (`<p class="title">${newRecipe.name}`)
-    let $delIcon = ('<i class="material-icons" id="addBtn">favorite</i><br />')
+    let $name = (`<p class="onetitle">${newRecipe.name}<br />`)
+    let $addIcon = ('<i class="material-icons" id="addBtn">add_circle<span class="hidden">ADD TO FAV</span></i><br />')
 
     let $divRow = $('<div class="onerow">')
     let $serving = (`<i class="material-icons">accessibility</i>${newRecipe.serving} ||`)
@@ -134,20 +137,18 @@ $(function () {
       $ingredientul.append($ingredient)
     })
 
-    $divOne.append($image, $name, $delIcon, $divRow, $ingredientul )
+    $divOne.append($image, $addIcon, $name, $divRow, $ingredientul )
 
     $('#singleRecipeContainer').append($divOne)
 
     // to add event listener to click button that doesn't exist
     $('#singleRecipeContainer').on('click', '#addBtn', function (e) {
       e.preventDefault()
-      $('#spinner3').fadeIn()
       $.post('/favrecipe/add', newRecipe).done(function (data) {
         if (data.status === 'ok') {
           alert('added to my meals!')
-          $('#spinner3').fadeOut()
           $('#addBtn').hide()
-          $('#mymeals').html('<span>New</span> -Favourites')
+          $('#mymeals').html('<span><i class="material-icons new" >fiber_new</i></span> -Favourites')
         } else {
           alert(data)
           window.location.href = '/userAuth/register'
@@ -175,13 +176,11 @@ $(function () {
 
   $('#addBtn').on('click', function (e) {
     let id = location.pathname.split('/').pop()
-    $('#spinner3').fadeIn()
     $.post('/favrecipe/linkToUser', {'id':id}).done(function (data) {
       if (data.status === 'ok') {
         alert('added to my meals!')
-        $('#spinner3').fadeOut()
         $('#addBtn').hide()
-        $('#mymeals').html('<span> New </span>-Favourites')
+        $('#mymeals').html('<span><i class="material-icons">fiber_new</i></span> -Favourites')
       } else {
         alert(data)
         window.location.href = '/userAuth/register'

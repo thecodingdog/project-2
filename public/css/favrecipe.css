@@ -53,7 +53,7 @@ img {
     border-bottom: 1px solid #545454;
 }
 
-.item { /* Masonry bricks or child elements */
+.item { 
     background-color: #eee;
     display: inline-block;
     margin: 0 0 2em;

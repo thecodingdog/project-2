@@ -4,12 +4,12 @@
 
 <div class="item">
   <img src="{{onerecipe.imageUrl}}">
-  <p class="title">{{onerecipe.name}}<i class="material-icons" id="addBtn">favorite</i></p>
+  <p class="title"><i class="material-icons" id="addBtn">add_circle<span class="hidden">ADD TO FAV</span></i>{{onerecipe.name}}</p>
 
   <div class="row">
     <i class="material-icons">accessibility</i>{{onerecipe.serving}} |
     <i class="material-icons">alarm</i>{{onerecipe.timeDisplay}} |
-    <a href="{{onerecipe.instructionsUrl}}"><i class="material-icons">info</i>Direction</a>
+    <a href="{{onerecipe.instructionsUrl}}"><i class="material-icons">info</i>Directions</a>
   </div>
 
   <ul>

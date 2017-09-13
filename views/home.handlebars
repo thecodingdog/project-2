@@ -1,10 +1,14 @@
 
 <link rel="stylesheet" type="text/css" href="/css/search.css">
 
+<div class="searchback">
+  <h4 class>Welcome to Plentiful</h4>
 <div class="search">
   <input class="search-box" type="text" placeholder="" name="query" id="inputBox" />
   <i id="ingredientsSearch" class="material-icons">search</i>
 </div>
+</div>
+
 
 <img src='/img/spinner.gif' id='spinner'></img>
 
@@ -13,7 +17,7 @@
 <div id='singleRecipeContainer'></div>
 
 <div class='featuredSection'>
-  <h4>----- Featured Recipes -----</h4>
+  <h4 class="nospan">Featured Recipes</h4>
   <div class='featuredContainer'>
   <div class="items">
     <img src="{{recipe.[0].imageUrl}}" data={{recipe.[0].id}} class="featured">
