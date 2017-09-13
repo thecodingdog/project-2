@@ -4,6 +4,7 @@ const ingredientController = require('../controllers/ingredientController')
 
 router.post('/', ingredientController.add)
 router.post('/deleteOne', ingredientController.deleteOne)
+router.post('/sendSms', ingredientController.sendSms)
 // router.post('/deleteAll', ingredientController.add)
 
 router.get('/', ingredientController.findAllById)
