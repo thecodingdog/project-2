@@ -1,4 +1,4 @@
-<link rel="stylesheet" type="text/css" href="/css/groceries.css">
+<link rel="stylesheet" type="text/css" href="/css/ingredient.css">
 <h4>
   Welcome back {{user.name}} !
 </h4>
@@ -16,8 +16,10 @@
 
     {{/each}}
   </ul>
-</div>
 
 <form action='/ingredient/sendSms' method=post>
-  <button><i class="material-icons">perm_phone_msg</i></button>
+  <label>Send list to mobile number +65: <input type="text" name="hp"></label>
+  <button id='sms'><i class="material-icons">perm_phone_msg</i></button>
 </form>
+
+</div>

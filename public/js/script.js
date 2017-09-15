@@ -193,10 +193,13 @@ $('.deleteIngredients').on('click', function (e) {
   $(this).css('text-decoration', 'line-through')
   $.post('/ingredient/deleteOne', {'id':$(this).val()}).done(function(data){
     if (data.status === 'ok') {
-      // console.log('deleted one');
-      // alert('deleted!')
     }
   })
+})
+
+$('#sms').on('click', (e) => {
+  // $('#sms').remove()
+  alert('Message Sent!')
 })
 
     var socket = io()

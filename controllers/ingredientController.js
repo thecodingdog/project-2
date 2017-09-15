@@ -1,9 +1,9 @@
 const Ingredient = require('../models/Ingredient')
 const User = require('../models/User')
-// Twilio Credentials
 
-// require the Twilio module and create a REST client
-// var client = require('twilio')(accountSid, authToken)
+var authToken = process.env.authToken
+var accountSid = process.env.accountSid
+var client = require('twilio')(accountSid, authToken)
 
 function add (req, res) {
   if (Object.keys(req.body).length !== 0) {
@@ -65,21 +65,20 @@ function sendSms (req, res) {
       .populate('ingredients')
       .exec(function (err, data) {
         if (err) console.log(err)
-        console.log(data[0].ingredients);
-        // need to reduce this to a string data[0].ingredients.reduce((re,e,i,ar)=>e.name)
-        // client.messages.create({
-        //   to: '+6590227377',
-        //   from: '+12602757491',
-        //   body: data[0].ingredients
-        // }, function (err, message) {
-        //   if (err) console.log(err)
-        //   console.log('sms-success')
-        // })
-        res.send('sms-success')
+        // need to reduce this to a string
+        var string = data[0].ingredients.map(e=>e.name).join(", ")
+        console.log(string)
+        client.messages.create({
+          to: `+65${req.body.hp}`,
+          from: '+12602757491',
+          body: string
+        }, function (err, message) {
+          if (err) console.log(err)
+          console.log('sms-success')
+        })
       })
-  } else {
-    res.render('favrecipe', {name: req.flash('name')})
   }
+  res.redirect('/favrecipe')
 }
 
 module.exports = {
