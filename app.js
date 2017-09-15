@@ -10,6 +10,7 @@ const MongoStore = require('connect-mongo')(session)
 const flash = require('connect-flash')
 const passport = require('./config/passport')
 const url = process.env.MONGODB_URI
+const methodOverride = require('method-override')
 
 mongoose.Promise = global.Promise
 mongoose.connect(url, {
@@ -46,6 +47,8 @@ app.use(session({
 app.use(flash())
 app.use(passport.initialize())
 app.use(passport.session()) // this must be below session call
+app.use(methodOverride('_method'))
+
 
 // setup all files that the proj needs to require
 const userRoute = require('./routes/userRoute')

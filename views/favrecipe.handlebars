@@ -12,7 +12,7 @@
 
       <img src="{{recipe.imageUrl}}">
       <p class="title">{{recipe.name}}</p>
-      <form class='delete' action='/favrecipe/deleteOne' method='post'>
+      <form class='delete' action='/favrecipe/deleteOne?_method=delete' method='post'>
         <input class='recipeid' type='hidden' name='recipeid' value='{{recipe.id}}'>
         <button class="delete"><i class="material-icons">delete</i></button>
       </form><br />
@@ -37,7 +37,7 @@
 
       <div class="cookingnotes">
         Comments: <span>{{recipe.cookingnotes}}</span><br/>
-          <form class='comments' action='/favrecipe/update' method='post'>
+          <form class='comments' action='/favrecipe/update?_method=put' method='post'>
             <input id='commentbox' type="text" name='comment' placeholder="comment">
             <input class='recipeid' type='hidden' name='recipeid' value='{{recipe.id}}'>
             <button class="butt">Save</button>
@@ -49,7 +49,7 @@
 </div>
 
 <div class="deleteAll">
-  <form action='/favrecipe/removeAll' method=post class='deleteAll'>
+  <form action='/favrecipe/removeAll' method='post' class='deleteAll'>
     <button id=delete class="deleteAll">Delete All<i class="material-icons deleteAll">delete_sweep</i></button>
   </form>
 </div>

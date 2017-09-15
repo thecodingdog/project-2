@@ -7,7 +7,8 @@ function findAll(req,res){
     if (err) send(err)
     // console.log(data);
     res.render('home' ,{
-      recipe: data
+      recipe: data,
+      user: req.user
     })
   })
 }

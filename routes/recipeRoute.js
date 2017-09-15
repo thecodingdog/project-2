@@ -7,12 +7,12 @@ router.get('/', recipeController.authenticateUser, recipeController.findAllById)
 
 router.post('/add', recipeController.add)
 
+router.post('/addFeatRecToUser', recipeController.addFeatRecToUser)
+
+router.put('/update', recipeController.updateNotes)
+
+router.delete('/deleteOne', recipeController.deleteOne)
+
 router.post('/removeAll', recipeController.destroyAll)
-
-router.post('/update', recipeController.updateNotes)
-
-router.post('/deleteOne', recipeController.deleteOne)
-
-router.post('/linkToUser', recipeController.linkToUser)
 
 module.exports = router

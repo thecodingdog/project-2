@@ -1,5 +1,6 @@
 const Ingredient = require('../models/Ingredient')
 const User = require('../models/User')
+const passport = require('../config/passport')
 
 var authToken = process.env.authToken
 var accountSid = process.env.accountSid
@@ -81,10 +82,15 @@ function sendSms (req, res) {
   res.redirect('/favrecipe')
 }
 
+function authenticateUser (req, res, next) {
+  if (req.isAuthenticated()) { return next() }
+  else { res.redirect('/userAuth/login') }
+} 
+
 module.exports = {
   add,
   findAllById,
   deleteOne,
-  sendSms
-  // deleteAll
+  sendSms,
+  authenticateUser
 }

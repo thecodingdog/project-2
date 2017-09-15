@@ -14,7 +14,13 @@ $(function () {
     if (key == 13) { obtainQuery() }
   })
 
-  $('#next').on('click', obtainQuery)
+  $(window).on('scroll', function () {
+    var divht = $('#searchResults').innerHeight()
+    if (divht && $(this).scrollTop() * 30 >  divht) {
+      console.log('reached the end?');
+      obtainQuery()
+    }
+  })
 
   function obtainQuery () {
     let query = $inputBox[0].value
@@ -26,13 +32,10 @@ $(function () {
   }
 
   function ajaxTextSearch (finalUrl, query) {
-    // console.log('ajaxran')
     $spinner.fadeIn()
     // callback for all related results
     $.get(finalUrl).done(function (data) {
       $spinner.fadeOut()
-      $('#next').css('display', 'inline-block')
-      $('#searchResults').empty()
       $('.searchback').remove()
       $('.featuredSection').empty()
       let results = data.matches
@@ -44,20 +47,13 @@ $(function () {
           let title = e.recipeName
           let $div = $('<div>')
           $div.addClass('imgDisplay')
-          // $div.addClass('items')
           $div.attr('data-myval', e.id)
           let $img = $('<img>')
           $img.attr('src',`${img}`)
           $div.append($img)
-          // $div.css('background-image', `url(${img})`)
-          // title div
           let $p = $('<p>')
           $p.text(title)
           $div.append($p)
-          // let $textdiv = $('<div>')
-          // $textdiv.text(title)
-          // $textdiv.hover()
-          // $div.append($textdiv)
           $searchResults.append($div)
           $div.on('click', idSearch)
           $div = $(this)
@@ -68,7 +64,6 @@ $(function () {
 
   // callback function to view detailed recipe
   function idSearch (specificUrl, specific) {
-    $('#next').css('display', 'none')
     let basic = 'https://api.yummly.com/v1/api/recipe/'
     var specific = $(this).data('myval') // div.id
     let ending = '?_app_id=16387952&_app_key=fa6bd04f985e3b1a42e5880de6dcb9e5'
@@ -86,16 +81,14 @@ $(function () {
   // }
 
   window.onpopstate = function(){
-    // $('#recipePageLeft').empty()
-    // $('#recipePageRight').empty()
+    $('#singleRecipeContainer').empty()
     if (!window.history.state){
       window.location.href = '/'
     }
     else {
       let query = window.history.state.querystring
       var finalUrl = `${apiUrl}${query}${page}${start}`
-      $('#searchResults').css('display', 'flex')
-      // $('.hero-body').css('display', 'block')
+      $('#searchResults').css('display', 'block')
       $('#singleRecipeContainer').css('display', 'none')
       ajaxTextSearch (finalUrl, query)
     }
@@ -141,7 +134,7 @@ $(function () {
 
     $('#singleRecipeContainer').append($divOne)
 
-    // to add event listener to click button that doesn't exist
+    // to add event listener to click button
     $('#singleRecipeContainer').on('click', '#addBtn', function (e) {
       e.preventDefault()
       $.post('/favrecipe/add', newRecipe).done(function (data) {
@@ -153,13 +146,11 @@ $(function () {
           alert(data)
           window.location.href = '/userAuth/register'
         }
-        // $('#addBtn').removeClass('enabled')
       })
     })
 }
 
   $('#delete').on('click', function (e) {
-    // e.preventDefault()
     $.post('/favrecipe/removeAll').done(function () {
       alert('removed all')
     })
@@ -167,7 +158,6 @@ $(function () {
 
 
   $('.featured').on('click', function(){
-    // console.log($(this).attr('data'))
     let imgid = $(this).attr('data')
     $.get(`/home/one/${imgid}`).done(function (e) {
       window.location.href = `/home/one/${imgid}`
@@ -176,7 +166,7 @@ $(function () {
 
   $('#addBtn').on('click', function (e) {
     let id = location.pathname.split('/').pop()
-    $.post('/favrecipe/linkToUser', {'id':id}).done(function (data) {
+    $.post('/favrecipe/addFeatRecToUser', {'id':id}).done(function (data) {
       if (data.status === 'ok') {
         alert('added to my meals!')
         $('#addBtn').hide()
@@ -198,7 +188,6 @@ $('.deleteIngredients').on('click', function (e) {
 })
 
 $('#sms').on('click', (e) => {
-  // $('#sms').remove()
   alert('Message Sent!')
 })
 

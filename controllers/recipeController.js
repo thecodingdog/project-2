@@ -4,7 +4,7 @@ const passport = require('../config/passport')
 const mongoose = require('mongoose')
 
 // need to create one instance of recipe for each user coz user notes are now shared!
-function linkToUser(req,res){
+function addFeatRecToUser(req,res){
   if (req.isAuthenticated()){
     // console.log(req.body)
     let currentuser = req.user
@@ -131,7 +131,7 @@ function timeCombined (arr) {
 }
 
 function authenticateUser (req, res, next) {
-  if (req.isAuthenticated()) { return next() } // if user is logged in, do next
+  if (req.isAuthenticated()) { return next() }
   else { res.redirect('/userAuth/login') }
 }
 
@@ -142,5 +142,5 @@ module.exports = {
   updateNotes,
   deleteOne,
   authenticateUser,
-  linkToUser
+  addFeatRecToUser
 }

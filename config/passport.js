@@ -42,7 +42,7 @@ function localVerify(req, passportEmail, password, next) {
       next(null, foundUser) // go to successRedirect
     }
     if (!foundUser.validPassword(password)) {
-      next(null, err, req.flash('message', 'Oops! Wrong password!'));
+      return next(null, err, req.flash('message', 'Oops! Wrong password!'));
       //to set error msg using failureFlash
       // next(null, err) // goes to failureRedirect
     }

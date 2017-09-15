@@ -92,11 +92,10 @@ a {
 /*for search results*/
 .resultContainer{
   column-count: 3;
-  /*column-gap: 2em;*/
   margin: 20px 40px;
-  /*margin: 10px 200px 40px 200px;*/
   border-bottom: 1px solid #545454;
 }
+
 
 .imgDisplay img{
   margin: 2%;

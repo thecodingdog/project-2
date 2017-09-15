@@ -3,7 +3,6 @@
 <head>
   <meta charset="utf-8">
   <title>Plentiful</title>
-  {{!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.3/css/bulma.css"> --}}
 
 </head>
 
@@ -13,8 +12,6 @@
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Lato" />
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Montserrat" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    {{!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"> --}}
-    {{!-- <link rel="stylesheet" type="text/css" href="/css/bulma.css"> --}}
     <link rel="stylesheet" type="text/css" href="/css/main.css">
   </head>
   <body>
@@ -23,18 +20,7 @@
         <h1><a href='/'>PLENTIFUL</a></h1>
         <div class="tagline"><p>==Your Recipe Diary==</p></div>
       </div>
-      {{!-- <div class="hero-head">
-        <div class="container">
-          <nav class="nav">
-            <div class="container">
-              <span class="nav-toggle">
-              </span>
-              <div class="nav-right nav-menu"> --}}
-              <div class ="nav">
-
-                {{!-- <a class="nav-item" href=/home/all>
-                  Home
-                </a> --}}
+        <div class ="nav">
                 <a class="nav-item" href=/>
                   Search
                 </a>
@@ -44,33 +30,18 @@
                 <a class="nav-item" href=/ingredient>
                   Groceries
                 </a>
-                <a class="nav-item" href=/userAuth/login>
-                  Login/Register {{flash}}
+                {{#if user}}
+                <a class="nav-item" href=/userAuth/logout>
+                  Logout
                 </a>
-                {{!-- <a class="nav-item" href=/userAuth/register>
-                  Register
-                </a> --}}
-
+                {{else}}
+                <a class="nav-item" href=/userAuth/login>
+                  Login/Register
+                </a>
+                {{/if}}
               </div>
-              {{!-- </div>
-            </div>
-          </nav>
-        </div>
-      </div> --}}
-
       {{{ body }}}
 
-      {{!-- <div class="hero-foot">
-        <div class="container">
-          <div class="tabs is-centered">
-            <ul>
-              <li></li>
-              <li></li>
-              <li></li>
-            </ul>
-          </div>
-        </div>
-      </div> --}}
     </div>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     {{!-- for chat - experimental --}}
@@ -79,20 +50,7 @@
   </body>
 
 <footer>
-  {{!-- <div class ="nav"> --}}
-    {{!-- <a class="nav-item" href=/>
-      Search
-    </a>
-    <a class="nav-item" href=/favrecipe id='mymeals'>
-      Favourites
-    </a>
-    <a class="nav-item" href=/ingredient>
-      Groceries
-    </a>
-    <a class="nav-item" href=/userAuth/login>
-      Login/Register {{flash}}
-    </a> --}}
-  {{!-- </div> --}}
+
   <a href="mailto:ngwanzhen@gmail.com"><p>&copy; thecodingdog</p></a>
 </footer>
 
