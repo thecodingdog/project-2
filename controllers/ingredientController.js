@@ -3,7 +3,7 @@ const User = require('../models/User')
 // Twilio Credentials
 
 // require the Twilio module and create a REST client
-var client = require('twilio')(accountSid, authToken)
+// var client = require('twilio')(accountSid, authToken)
 
 function add (req, res) {
   if (Object.keys(req.body).length !== 0) {
