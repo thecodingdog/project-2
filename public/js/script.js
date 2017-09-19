@@ -1,3 +1,5 @@
+/* global $:true */
+
 $(function () {
   const apiUrl = 'https://api.yummly.com/v1/api/recipes?_app_id=16387952&_app_key=fa6bd04f985e3b1a42e5880de6dcb9e5&q='
   const page = '&maxResult=8&start='
@@ -11,35 +13,35 @@ $(function () {
   $searchIngredients.on('click', obtainQuery)
   $('#inputBox').keypress(function (e) {
     var key = e.which
-    if (key == 13) { obtainQuery() }
+    if (key === 13) {
+      obtainQuery()
+    }
   })
 
   $(window).on('scroll', function () {
     var divht = $('#searchResults').innerHeight()
-    if (divht && $(this).scrollTop() * 30 >  divht) {
-      console.log('reached the end?');
+    if (divht && $(this).scrollTop() * 30 > divht) {
       obtainQuery()
     }
   })
 
   function obtainQuery () {
     let query = $inputBox[0].value
-    console.log(query);
     var finalUrl = `${apiUrl}${query}${page}${start}`
     ajaxTextSearch(finalUrl, query)
     start += 12
-    history.pushState({querystring :query}, "title-1", "?page=searchresults")
+    window.history.pushState({
+      querystring: query
+    }, 'title-1', '?page=searchresults')
   }
 
   function ajaxTextSearch (finalUrl, query) {
     $spinner.fadeIn()
-    // callback for all related results
     $.get(finalUrl).done(function (data) {
       $spinner.fadeOut()
       $('.searchback').remove()
       $('.featuredSection').empty()
       let results = data.matches
-      // console.log(results)
       results.forEach(function (e) {
         if (e.imageUrlsBySize) {
           let img = e.imageUrlsBySize[90]
@@ -49,7 +51,7 @@ $(function () {
           $div.addClass('imgDisplay')
           $div.attr('data-myval', e.id)
           let $img = $('<img>')
-          $img.attr('src',`${img}`)
+          $img.attr('src', `${img}`)
           $div.append($img)
           let $p = $('<p>')
           $p.text(title)
@@ -65,32 +67,28 @@ $(function () {
   // callback function to view detailed recipe
   function idSearch (specificUrl, specific) {
     let basic = 'https://api.yummly.com/v1/api/recipe/'
-    var specific = $(this).data('myval') // div.id
+    specific = $(this).data('myval') // div.id
     let ending = '?_app_id=16387952&_app_key=fa6bd04f985e3b1a42e5880de6dcb9e5'
-    var specificUrl = `${basic}${specific}${ending}`
+    specificUrl = `${basic}${specific}${ending}`
     $.get(specificUrl).done(function (data) {
-      console.log(data)
       displayRecipe(data)
-      history.pushState({specificquery: specific}, "title 2", "?page=onerecipe");
+      window.history.pushState({
+        specificquery: specific
+      }, 'title 2', '?page=onerecipe')
     })
   }
 
-  // to handle back thru popstate (onhashchange doens't detect on pushstate)
-  // window.onpopstate = function(event){
-  //   console.log("location: " + document.location + ", state: " + JSON.stringify(event.state))
-  // }
-
-  window.onpopstate = function(){
+  // to handle back thru popstate
+  window.onpopstate = function () {
     $('#singleRecipeContainer').empty()
-    if (!window.history.state){
+    if (!window.history.state) {
       window.location.href = '/'
-    }
-    else {
+    } else {
       let query = window.history.state.querystring
       var finalUrl = `${apiUrl}${query}${page}${start}`
       $('#searchResults').css('display', 'block')
       $('#singleRecipeContainer').css('display', 'none')
-      ajaxTextSearch (finalUrl, query)
+      ajaxTextSearch(finalUrl, query)
     }
   }
 
@@ -110,7 +108,7 @@ $(function () {
       instructions: data.source.sourceRecipeUrl,
       ingredients: data.ingredientLines, // array
       timeSeconds: data.totalTimeInSeconds,
-      rating: data.rating,
+      rating: data.rating
     }
 
     let $divOne = $('<div class="one">')
@@ -121,7 +119,7 @@ $(function () {
     let $divRow = $('<div class="onerow">')
     let $serving = (`<i class="material-icons">accessibility</i>${newRecipe.serving} ||`)
     let $timeDisplay = (`<i class="material-icons">alarm</i>${newRecipe.timeDisplay} ||`)
-    let $instructions = (`<a href=${newRecipe.instructions} target="_blank"><i class="material-icons">info</i>Directions</a>`)
+    let $instructions = (`<a target="_blank" href=${newRecipe.instructions} target="_blank"><i class="material-icons" id="dir">info</i>Directions</a>`)
     $divRow.append($serving, $timeDisplay, $instructions)
 
     let $ingredientul = $("<ul class='ingredientList'></ul>")
@@ -130,7 +128,7 @@ $(function () {
       $ingredientul.append($ingredient)
     })
 
-    $divOne.append($image, $addIcon, $name, $divRow, $ingredientul )
+    $divOne.append($image, $addIcon, $name, $divRow, $ingredientul)
 
     $('#singleRecipeContainer').append($divOne)
 
@@ -139,25 +137,24 @@ $(function () {
       e.preventDefault()
       $.post('/favrecipe/add', newRecipe).done(function (data) {
         if (data.status === 'ok') {
-          alert('added to my meals!')
+          window.alert('added to my meals!')
           $('#addBtn').hide()
           $('#mymeals').html('<span><i class="material-icons new" >fiber_new</i></span> -Favourites')
         } else {
-          alert(data)
+          window.alert(data)
           window.location.href = '/userAuth/register'
         }
       })
     })
-}
+  }
 
   $('#delete').on('click', function (e) {
     $.post('/favrecipe/removeAll').done(function () {
-      alert('removed all')
+      window.alert('removed all')
     })
   })
 
-
-  $('.featured').on('click', function(){
+  $('.featured').on('click', function () {
     let imgid = $(this).attr('data')
     $.get(`/home/one/${imgid}`).done(function (e) {
       window.location.href = `/home/one/${imgid}`
@@ -165,33 +162,35 @@ $(function () {
   })
 
   $('#addBtn').on('click', function (e) {
-    let id = location.pathname.split('/').pop()
-    $.post('/favrecipe/addFeatRecToUser', {'id':id}).done(function (data) {
+    let id = window.location.pathname.split('/').pop()
+    $.post('/favrecipe/addFeatRecToUser', {
+      'id': id
+    }).done(function (data) {
       if (data.status === 'ok') {
-        alert('added to my meals!')
+        window.alert('added to my meals!')
         $('#addBtn').hide()
         $('#mymeals').html('<span><i class="material-icons">fiber_new</i></span> -Favourites')
       } else {
-        alert(data)
+        window.alert(data)
         window.location.href = '/userAuth/register'
       }
     })
   })
 
-$('.deleteIngredients').on('click', function (e) {
-  // console.log($(this).val())
-  $(this).css('text-decoration', 'line-through')
-  $.post('/ingredient/deleteOne', {'id':$(this).val()}).done(function(data){
-    if (data.status === 'ok') {
-    }
+  $('.deleteIngredients').on('click', function (e) {
+    $(this).css('text-decoration', 'line-through')
+    $.post('/ingredient/deleteOne', {
+      'id': $(this).val()
+    }).done(function (data) {
+      if (data.status === 'ok') {}
+    })
   })
-})
 
-$('#sms').on('click', (e) => {
-  alert('Message Sent!')
-})
+  $('#sms').on('click', (e) => {
+    window.alert('Message Sent!')
+  })
 
-    var socket = io()
+  var socket = io()
 })
 
 // // adding chat page, experimental

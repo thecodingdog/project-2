@@ -1,6 +1,4 @@
 
-{{!-- {{#if user}} --}}
-
 <link rel="stylesheet" type="text/css" href="/css/favrecipe.css">
 <h4>
   Welcome back {{user.name}} !
@@ -20,7 +18,7 @@
       <div class="row">
         <i class="material-icons">accessibility</i>{{recipe.serving}} |
         <i class="material-icons">alarm</i>{{recipe.timeDisplay}} |
-        <a href="{{recipe.instructionsUrl}}"><i class="material-icons">info</i>Direction</a>
+        <a target="_blank" href="{{recipe.instructionsUrl}}"><i class="material-icons">info</i>Directions</a>
       </div>
 
       <ul>
@@ -53,6 +51,3 @@
     <button id=delete class="deleteAll">Delete All<i class="material-icons deleteAll">delete_sweep</i></button>
   </form>
 </div>
-
-
-  {{!-- <a href='/userAuth/logout'><button id='logout'>LOG OUT</button></a> --}}

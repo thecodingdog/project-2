@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const Ingredient = require('../models/Ingredient')
 const User = require('../models/User')
 const passport = require('../config/passport')
@@ -68,7 +70,6 @@ function sendSms (req, res) {
         if (err) console.log(err)
         // need to reduce this to a string
         var string = data[0].ingredients.map(e=>e.name).join(", ")
-        console.log(string)
         client.messages.create({
           to: `+65${req.body.hp}`,
           from: '+12602757491',
@@ -85,7 +86,7 @@ function sendSms (req, res) {
 function authenticateUser (req, res, next) {
   if (req.isAuthenticated()) { return next() }
   else { res.redirect('/userAuth/login') }
-} 
+}
 
 module.exports = {
   add,

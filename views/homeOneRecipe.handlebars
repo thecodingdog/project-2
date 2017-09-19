@@ -1,4 +1,3 @@
-{{!-- <h1>one recipe</h1> --}}
 
 <link rel="stylesheet" type="text/css" href="/css/featuredOne.css">
 
@@ -9,7 +8,7 @@
   <div class="row">
     <i class="material-icons">accessibility</i>{{onerecipe.serving}} |
     <i class="material-icons">alarm</i>{{onerecipe.timeDisplay}} |
-    <a href="{{onerecipe.instructionsUrl}}"><i class="material-icons">info</i>Directions</a>
+    <a target="_blank" href="{{onerecipe.instructionsUrl}}"><i class="material-icons">info</i>Directions</a>
   </div>
 
   <ul>
@@ -21,38 +20,3 @@
   </ul>
 
 </div>
-{{!--
-<div class='singleRecipeContainer'>
-  <div id='onerecipePageLeft'>
-    <div id = 'bottomleft'>
-      <p>Time:<em>{{onerecipe.timeDisplay}}</em></p>
-    </div>
-      <h1>{{onerecipe.name}}</h1>
-      <img src = {{onerecipe.imageUrl}} height=200 width=300>
-  </div>
-  <div id='recipePageRight'>
-    <p><u>
-      Servings: {{onerecipe.serving}}
-  </u></p>
-    <h2>Ingredients</h2>
-    <ul class='ingredientList'>
-      {{#each onerecipe.ingredients}}
-        <li>{{this}}</li>
-      {{/each}}
-    </ul>
-    <u><a href = {{onerecipe.instructionsUrl}} >Instructions</a></u><br/>
-    <button id="addBtn" class="enabled">Add to My Meals</button>
-    <img src="/img/spinner.gif" id="spinner3">
-  </div>
-</div>
-
-    {{#if onerecipe.instructions}}
-    <div class = 'singleRecipeContainer'>
-    <h2>Instructions</h2>
-    <ul class='ingredientList'>
-      {{#each onerecipe.instructions}}
-      <li>{{this}}</li>
-      {{/each}}
-    </ul>
-    {{/if}}
-  </div> --}}

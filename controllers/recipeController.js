@@ -6,7 +6,6 @@ const mongoose = require('mongoose')
 // need to create one instance of recipe for each user coz user notes are now shared!
 function addFeatRecToUser(req,res){
   if (req.isAuthenticated()){
-    // console.log(req.body)
     let currentuser = req.user
     Recipe.findById({_id: req.body.id}, function(err,copyRecipe){
       copyRecipe._id = mongoose.Types.ObjectId()
@@ -39,7 +38,6 @@ if (req.isAuthenticated()){
     calories: req.body.calories
   }, function (err, recipe) { // remember that AJAX post can't redirect, callback is for linking recipe
     if (err) console.log(err)
-    console.log(req.user)
     recipe.users.push(req.user.id) // first callback: push user id into recipe
     recipe.save()
     // push recipe into user, don't have to find again coz req.user is persistent thru passport
@@ -48,7 +46,6 @@ if (req.isAuthenticated()){
     res.send({
       status: 'ok'
     })
-    // console.log(req.user)
   })
 }
 else {res.send('user not logged in')}
@@ -62,7 +59,6 @@ function findAllById (req, res) {
     })
       .populate('recipes')
       .exec(function (err, data) {
-        // console.log(data[0].recipes[0]);
         if (err) send(err)
         res.render('favrecipe', {
           dbitems: data[0].recipes,
@@ -85,12 +81,10 @@ function destroyAll (req, res) {
 }
 
 function updateNotes (req, res) {
-    console.log(req.body)
     Recipe.find({
       _id: req.body.recipeid
     })
     .exec(function(err,data){
-      console.log(data[0].cookingnotes)
       data[0].cookingnotes.push(req.body.comment)
       data[0].save()
       res.redirect('/favrecipe')

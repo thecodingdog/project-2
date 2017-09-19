@@ -13,8 +13,6 @@ function create (req,res,next){
         req.flash('errors', err.message)
         return res.render('userAuth/register', {flash: req.flash('errors')}) //if errors
       }
-      // res.redirect('/search') //if success
-      console.log('saved')
       next()
   })
 }

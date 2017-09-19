@@ -49,7 +49,6 @@ app.use(passport.initialize())
 app.use(passport.session()) // this must be below session call
 app.use(methodOverride('_method'))
 
-
 // setup all files that the proj needs to require
 const userRoute = require('./routes/userRoute')
 const recipeRoute = require('./routes/recipeRoute')
