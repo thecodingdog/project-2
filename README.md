@@ -54,9 +54,7 @@ https://thecodingdog.herokuapp.com/
   * nodemon
   * passport
 
-## Workflow
-
-# User Story
+## User Story
 1. search recipes
 2. add to favorites
 3. track calorie intake
@@ -67,10 +65,10 @@ https://thecodingdog.herokuapp.com/
 8. create groceries list from favourite recipes
 9. SMS list to pre-configured mobile numbers
 
-# Model diagram
+## Model diagram
 ![alt text](public/img/ERD.png?raw=true 'start')
 
-# Wireframes
+## Wireframes
 ![alt text](public/img/wireframe.jpg?raw=true 'start')
 
 ## Acknowledgments
