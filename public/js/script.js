@@ -92,7 +92,7 @@ $(function () {
       ajaxTextSearch(finalUrl, query)
     }
   }
-  var newRecipe={}
+  var newRecipe = {}
   // callback to display recipe data in DOM
   function displayRecipe (data) {
     $('#searchResults').css('display', 'none')

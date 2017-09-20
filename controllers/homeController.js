@@ -18,7 +18,8 @@ function findOne(req,res){
   Recipe.findById({_id:req.params.id}, function(err,data){
     if (err) console.log(err)
     res.render('homeOneRecipe' ,{
-      onerecipe: data
+      onerecipe: data,
+      user: req.user
     })
   })
 }
