@@ -180,3 +180,7 @@ textarea {
   text-transform: capitalize;
   cursor: pointer;
 }
+
+#user {
+  color: #F66957;
+}

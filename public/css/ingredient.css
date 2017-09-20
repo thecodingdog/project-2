@@ -71,3 +71,19 @@ button{
 form{
   float: right;
 }
+.disclaim{
+  float: right;
+}
+.disclaim a{
+  text-decoration: underline;
+  color: black;
+}
+
+.deleteIngredients:hover{
+  text-decoration: line-through;
+}
+
+
+#ingredient {
+  color: #F66957;
+}

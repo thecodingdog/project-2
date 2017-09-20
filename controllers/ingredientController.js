@@ -31,8 +31,9 @@ function add (req, res) {
     })
     req.user.save()
   })
-    res.redirect('/ingredient')
-  } else res.redirect('/ingredient')
+    // res.send({status: 'ok'})
+    res.redirect('/favrecipe')
+  } else res.redirect('/favrecipe')
 }
 
 function findAllById (req, res) {

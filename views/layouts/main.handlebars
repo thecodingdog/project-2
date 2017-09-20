@@ -3,6 +3,8 @@
 <head>
   <meta charset="utf-8">
   <title>Plentiful</title>
+  <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="img/favicon.ico" type="image/x-icon">
 
 </head>
 
@@ -13,6 +15,7 @@
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Montserrat" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
   </head>
   <body>
     <div class="page">
@@ -21,21 +24,21 @@
         <div class="tagline"><p>==Your Recipe Diary==</p></div>
       </div>
         <div class ="nav">
-                <a class="nav-item" href=/>
+                <a class="nav-item" href=/ id='home'>
                   Search
                 </a>
                 <a class="nav-item" href=/favrecipe id='mymeals'>
                   Favourites
                 </a>
-                <a class="nav-item" href=/ingredient>
+                <a class="nav-item" href=/ingredient id='ingredient'>
                   Groceries
                 </a>
                 {{#if user}}
-                <a class="nav-item" href=/userAuth/logout>
+                <a class="nav-item" href=/userAuth/logout id='user'>
                   Logout
                 </a>
                 {{else}}
-                <a class="nav-item" href=/userAuth/login>
+                <a class="nav-item" href=/userAuth/login id='user'>
                   Login/Register
                 </a>
                 {{/if}}
@@ -43,7 +46,13 @@
       {{{ body }}}
 
     </div>
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
+    {{!-- <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script> --}}
+      {{!-- <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script> --}}
+    {{!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script> --}}
     {{!-- for chat - experimental --}}
     {{!-- <script src="/socket.io/socket.io.js"></script> --}}
     <script src="/js/script.js" charset="utf-8"></script>

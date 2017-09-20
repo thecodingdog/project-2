@@ -1,5 +1,5 @@
 /* global $:true */
-
+/* global toastr:true */
 $(function () {
   const apiUrl = 'https://api.yummly.com/v1/api/recipes?_app_id=16387952&_app_key=fa6bd04f985e3b1a42e5880de6dcb9e5&q='
   const page = '&maxResult=8&start='
@@ -88,19 +88,18 @@ $(function () {
       var finalUrl = `${apiUrl}${query}${page}${start}`
       $('#searchResults').css('display', 'block')
       $('#singleRecipeContainer').css('display', 'none')
+      $('.one').remove()
       ajaxTextSearch(finalUrl, query)
     }
   }
-
+  var newRecipe={}
   // callback to display recipe data in DOM
   function displayRecipe (data) {
     $('#searchResults').css('display', 'none')
     $('.searchback').remove()
-
-    // $('.search').css('display', 'none')
     $('#singleRecipeContainer').css('display', 'flex')
 
-    let newRecipe = {
+    newRecipe = {
       serving: data.numberOfServings,
       timeDisplay: data.totalTime,
       name: data.name,
@@ -112,7 +111,7 @@ $(function () {
     }
 
     let $divOne = $('<div class="one">')
-    let $image = (`<img src=${newRecipe.image}>`)
+    let $image = (`<img src=${newRecipe.image} id="toAdd">`)
     let $name = (`<p class="onetitle">${newRecipe.name}<br />`)
     let $addIcon = ('<i class="material-icons" id="addBtn">add_circle<span class="hidden">ADD TO FAV</span></i><br />')
 
@@ -131,26 +130,24 @@ $(function () {
     $divOne.append($image, $addIcon, $name, $divRow, $ingredientul)
 
     $('#singleRecipeContainer').append($divOne)
-
-    // to add event listener to click button
-    $('#singleRecipeContainer').on('click', '#addBtn', function (e) {
-      e.preventDefault()
-      $.post('/favrecipe/add', newRecipe).done(function (data) {
-        if (data.status === 'ok') {
-          window.alert('added to my meals!')
-          $('#addBtn').hide()
-          $('#mymeals').html('<span><i class="material-icons new" >fiber_new</i></span> -Favourites')
-        } else {
-          window.alert(data)
-          window.location.href = '/userAuth/register'
-        }
-      })
-    })
   }
+
+  $('body').on('click', '#addBtn', function (e) {
+    $.post('/favrecipe/add', newRecipe).done(function (data) {
+      if (data.status === 'ok') {
+        $('#addBtn').hide()
+        $('#mymeals').html('<span><i class="material-icons new" >fiber_new</i></span> -Favourites')
+        toastr.error('added to Favourites!')
+      } else {
+        window.alert(data)
+        window.location.href = '/userAuth/register'
+      }
+    })
+  })
 
   $('#delete').on('click', function (e) {
     $.post('/favrecipe/removeAll').done(function () {
-      window.alert('removed all')
+      toastr.warning('removed all')
     })
   })
 
@@ -167,7 +164,8 @@ $(function () {
       'id': id
     }).done(function (data) {
       if (data.status === 'ok') {
-        window.alert('added to my meals!')
+        toastr.error('added to Favourites!')
+        // window.alert('added to my meals!')
         $('#addBtn').hide()
         $('#mymeals').html('<span><i class="material-icons">fiber_new</i></span> -Favourites')
       } else {
@@ -176,6 +174,11 @@ $(function () {
       }
     })
   })
+
+$('body').on('click', '.addIng', function(e){
+  toastr.error('added to Groceries')
+  // window.alert('added to Groceries')
+})
 
   $('.deleteIngredients').on('click', function (e) {
     $(this).css('text-decoration', 'line-through')
@@ -187,7 +190,7 @@ $(function () {
   })
 
   $('#sms').on('click', (e) => {
-    window.alert('Message Sent!')
+    toastr.error('Message Sent!')
   })
 
   var socket = io()
@@ -201,7 +204,7 @@ $(function () {
 //   $chatform = $('#chatform')
 //   $chatform.on('submit', function (e) {
 //     e.preventDefault()
-//     console.log('submit through ajax')
+//     log('submit through ajax')
 //     let msgVal = $m.val()
 //     console.log(msgVal)
 //     socket.emit('chat', msgVal)

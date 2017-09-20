@@ -53,7 +53,7 @@ img {
     border-bottom: 1px solid #545454;
 }
 
-.item { 
+.item {
     background-color: #eee;
     display: inline-block;
     margin: 0 0 2em;
@@ -122,4 +122,8 @@ span{
   margin: 2px auto;
   font-size: 1rem;
   /*background-color: #F1D1A0;*/
+}
+
+#mymeals {
+  color: #F66957;
 }
