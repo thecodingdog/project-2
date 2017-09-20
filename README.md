@@ -1,9 +1,9 @@
-# Care-lo-ries
+# Plentiful
 
 This website is meant to help people
 * get inspiration for recipes
-* control calorie intake by planning their meals ahead and checking if the total calories planned for the day / week fits within their personal target
-* save down recipes that they've tried and note down with 'cook again?' or 'never ever!'
+* save down recipes and make notes like 'to cook on Monday' or 'reduce spices'
+* create groceries list from favourite recipes
 
 ## Getting Started
 
@@ -64,9 +64,11 @@ https://thecodingdog.herokuapp.com/
 5. delete and re-plan again
 6. view saved plans and key ingredients
 7. able to jot down some notes for the recipes
+8. create groceries list from favourite recipes
+9. SMS list to pre-configured mobile numbers
 
 # Model diagram
-![alt text](public/img/erd.jpg?raw=true 'start')
+![alt text](public/img/ERD.png?raw=true 'start')
 
 # Wireframes
 ![alt text](public/img/wireframe.jpg?raw=true 'start')
@@ -74,6 +76,7 @@ https://thecodingdog.herokuapp.com/
 ## Acknowledgments
 thanks to the internet... which gave me
 * api from yummly
+* api from Twilio
 * background photos from unplash
 * css templates from various codepen sources
 
