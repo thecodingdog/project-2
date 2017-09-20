@@ -158,15 +158,14 @@ $(function () {
     })
   })
 
-  $('#addBtn').on('click', function (e) {
+  $('#featAddBtn').on('click', function (e) {
     let id = window.location.pathname.split('/').pop()
     $.post('/favrecipe/addFeatRecToUser', {
       'id': id
     }).done(function (data) {
       if (data.status === 'ok') {
         toastr.error('added to Favourites!')
-        // window.alert('added to my meals!')
-        $('#addBtn').hide()
+        $('#featAddBtn').hide()
         $('#mymeals').html('<span><i class="material-icons">fiber_new</i></span> -Favourites')
       } else {
         window.alert(data)

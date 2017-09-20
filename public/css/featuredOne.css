@@ -50,7 +50,7 @@ li {
   text-align: left;
 }
 
-#addBtn{
+#featAddBtn{
   color: red;
   font-size: 2rem;
   cursor: pointer;
@@ -59,12 +59,12 @@ li {
   align-items: center;
   margin-left: 20%;
 }
-#addBtn span.hidden{
+#featAddBtn span.hidden{
   visibility: hidden;
   font-size: 0.5rem;
   font-family: 'Lato', sans-serif;
 }
-#addBtn:hover span.hidden{
+#featAddBtn:hover span.hidden{
   visibility: visible;
 }
 
