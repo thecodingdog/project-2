@@ -22,10 +22,10 @@
       </div>
 
       <ul>
-        <form action="/ingredient" method="post">
+        <form action="/ingredient" method="#">
         {{#each recipe.ingredients as |ingredient|}}
         <li>
-          <input type="checkbox" name="ingredient" value="{{ingredient}}">
+          <input type="checkbox" name="ingredient" value="{{ingredient}}" class="ingForm">
            {{ingredient}}
          </li>
         {{/each}}

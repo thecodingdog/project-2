@@ -174,10 +174,19 @@ $(function () {
     })
   })
 
-$('body').on('click', '.addIng', function(e){
-  toastr.error('added to Groceries')
-  // window.alert('added to Groceries')
-})
+  $('body').on('click', '.addIng', function (e) {
+    e.preventDefault()
+    if ($('.ingForm').is(':checked')) {
+      $.post('/ingredient', $('input.ingForm:checked').serialize())
+      .done(function (data) {
+        $('#ingredient').html('<span><i class="material-icons new" >fiber_new</i></span> -Groceries')
+        toastr.error('added to Groceries')
+      })
+      .fail(function (err) {
+        console.log(err)
+      })
+    }
+  })
 
   $('.deleteIngredients').on('click', function (e) {
     $(this).css('text-decoration', 'line-through')

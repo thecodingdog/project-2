@@ -30,10 +30,9 @@ function add (req, res) {
       req.user.ingredients.push(each.id)
     })
     req.user.save()
+    res.send('success')
   })
-    // res.send({status: 'ok'})
-    res.redirect('/favrecipe')
-  } else res.redirect('/favrecipe')
+  } else res.send('error')
 }
 
 function findAllById (req, res) {
@@ -70,7 +69,7 @@ function sendSms (req, res) {
       .exec(function (err, data) {
         if (err) console.log(err)
         // need to reduce this to a string
-        var string = data[0].ingredients.map(e=>e.name).join(", ")
+        var string = data[0].ingredients.map(e => e.name).join(', ')
         client.messages.create({
           to: `+65${req.body.hp}`,
           from: '+12602757491',
@@ -85,8 +84,7 @@ function sendSms (req, res) {
 }
 
 function authenticateUser (req, res, next) {
-  if (req.isAuthenticated()) { return next() }
-  else { res.redirect('/userAuth/login') }
+  if (req.isAuthenticated()) { return next() } else { res.redirect('/userAuth/login') }
 }
 
 module.exports = {

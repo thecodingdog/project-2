@@ -71,10 +71,11 @@ app.use('/favrecipe', recipeRoute)
 app.use('/ingredient', ingredientRoute)
 
 // opening the port
-const port = process.env.PORT || 3000
-app.listen(port, function () {
-  console.log(`express is running on ${port}`)
-})
+app.listen(process.env.PORT || 3000)
+console.log('Server UP at localhost:3000')
+
+// we export the running server so we can use it in testing
+module.exports = app
 
 // // adding sockets experimental
 // const http = require('http').createServer(app)

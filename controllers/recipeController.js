@@ -4,51 +4,49 @@ const passport = require('../config/passport')
 const mongoose = require('mongoose')
 
 // need to create one instance of recipe for each user coz user notes are now shared!
-function addFeatRecToUser(req,res){
-  if (req.isAuthenticated()){
+function addFeatRecToUser (req, res) {
+  if (req.isAuthenticated()) {
     let currentuser = req.user
-    Recipe.findById({_id: req.body.id}, function(err,copyRecipe){
+    Recipe.findById({_id: req.body.id}, function (err, copyRecipe) {
       copyRecipe._id = mongoose.Types.ObjectId()
       copyRecipe.isNew = true
       copyRecipe.users.push(currentuser)
       copyRecipe.save()
-        currentuser.recipes.push(copyRecipe.id)
-        currentuser.save()
-        res.send({status: 'ok'})
+      currentuser.recipes.push(copyRecipe.id)
+      currentuser.save()
+      res.send({status: 'ok'})
     })
-  }
-  else {res.send('user not logged in')}
+  } else { res.send('user not logged in') }
 }
 
 // add to user only
 function add (req, res) {
-  //check if user is logged in
-if (req.isAuthenticated()){
-  Recipe.create({
-    serving: req.body.serving,
-    timeDisplay: req.body.timeDisplay,
-    name: req.body.name,
-    imageUrl: req.body.image,
-    instructionsUrl: req.body.instructions,
-    ingredients: req.body.ingredients,
-    timeSeconds: req.body.timeSeconds,
-    course: req.body.course,
-    cuisine: req.body.cuisine,
-    rating: req.body.rating,
-    calories: req.body.calories
-  }, function (err, recipe) { // remember that AJAX post can't redirect, callback is for linking recipe
-    if (err) console.log(err)
-    recipe.users.push(req.user.id) // first callback: push user id into recipe
-    recipe.save()
+  // check if user is logged in
+  if (req.isAuthenticated()) {
+    Recipe.create({
+      serving: req.body.serving,
+      timeDisplay: req.body.timeDisplay,
+      name: req.body.name,
+      imageUrl: req.body.image,
+      instructionsUrl: req.body.instructions,
+      ingredients: req.body.ingredients,
+      timeSeconds: req.body.timeSeconds,
+      course: req.body.course,
+      cuisine: req.body.cuisine,
+      rating: req.body.rating,
+      calories: req.body.calories
+    }, function (err, recipe) { // remember that AJAX post can't redirect, callback is for linking recipe
+      if (err) console.log(err)
+      recipe.users.push(req.user.id) // first callback: push user id into recipe
+      recipe.save()
     // push recipe into user, don't have to find again coz req.user is persistent thru passport
-    req.user.recipes.push(recipe.id)
-    req.user.save()
-    res.send({
-      status: 'ok'
+      req.user.recipes.push(recipe.id)
+      req.user.save()
+      res.send({
+        status: 'ok'
+      })
     })
-  })
-}
-else {res.send('user not logged in')}
+  } else { res.send('user not logged in') }
 }
 
 // findAll for individual users
@@ -70,7 +68,7 @@ function findAllById (req, res) {
         })
       })
   } else {
-    res.render('favrecipe',{name: req.flash('name')})
+    res.render('favrecipe', {name: req.flash('name')})
   }
 }
 
@@ -81,10 +79,10 @@ function destroyAll (req, res) {
 }
 
 function updateNotes (req, res) {
-    Recipe.find({
-      _id: req.body.recipeid
-    })
-    .exec(function(err,data){
+  Recipe.find({
+    _id: req.body.recipeid
+  })
+    .exec(function (err, data) {
       data[0].cookingnotes.push(req.body.comment)
       data[0].save()
       res.redirect('/favrecipe')
@@ -95,7 +93,7 @@ function deleteOne (req, res) {
   Recipe.findOneAndRemove({
     _id: req.body.recipeid
   })
-  .exec(function(err,data){
+  .exec(function (err, data) {
     res.redirect('/favrecipe')
   })
 }
@@ -125,8 +123,7 @@ function timeCombined (arr) {
 }
 
 function authenticateUser (req, res, next) {
-  if (req.isAuthenticated()) { return next() }
-  else { res.redirect('/userAuth/login') }
+  if (req.isAuthenticated()) { return next() } else { res.redirect('/userAuth/login') }
 }
 
 module.exports = {
