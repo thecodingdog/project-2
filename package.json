@@ -6,6 +6,7 @@
   "author": "Prima Aulia Gusta <primaulia@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "async": "^2.5.0",
     "bcrypt": "^1.0.2",
     "body-parser": "^1.17.2",
     "connect-flash": "^0.1.1",
@@ -31,7 +32,6 @@
     "test": "standard && NODE_ENV=test mocha test/test"
   },
   "devDependencies": {
-    "standard": "*",
     "chai": "^4.1.2",
     "gulp-nodemon": "^2.2.1",
     "http": "^0.0.0",
@@ -39,11 +39,16 @@
     "mocha": "^3.5.3",
     "osmosis": "^1.1.4",
     "socket.io": "^2.0.3",
+    "standard": "^10.0.3",
     "supertest": "^3.0.0"
   },
   "standard": {
     "globals": [
-      "$"
+      "$",
+      "describe",
+      "it",
+      "before",
+      "authenticatedUser"
     ]
   }
 }

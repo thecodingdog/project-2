@@ -153,8 +153,8 @@ $(function () {
 
   $('.featured').on('click', function () {
     let imgid = $(this).attr('data')
-    $.get(`/home/one/${imgid}`).done(function (e) {
-      window.location.href = `/home/one/${imgid}`
+    $.get(`/home/${imgid}`).done(function (e) {
+      window.location.href = `/home/${imgid}`
     })
   })
 
@@ -201,7 +201,7 @@ $(function () {
     toastr.error('Message Sent!')
   })
 
-  var socket = io()
+  // var socket = io()
 })
 
 // // adding chat page, experimental

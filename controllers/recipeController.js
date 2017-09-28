@@ -1,6 +1,6 @@
 const Recipe = require('../models/Recipe')
 const User = require('../models/User')
-const passport = require('../config/passport')
+// const passport = require('../config/passport')
 const mongoose = require('mongoose')
 
 // need to create one instance of recipe for each user coz user notes are now shared!
@@ -8,6 +8,7 @@ function addFeatRecToUser (req, res) {
   if (req.isAuthenticated()) {
     let currentuser = req.user
     Recipe.findById({_id: req.body.id}, function (err, copyRecipe) {
+      if (err) console.log(err)
       copyRecipe._id = mongoose.Types.ObjectId()
       copyRecipe.isNew = true
       copyRecipe.users.push(currentuser)
@@ -57,7 +58,7 @@ function findAllById (req, res) {
     })
       .populate('recipes')
       .exec(function (err, data) {
-        if (err) send(err)
+        if (err) console.log(err)
         res.render('favrecipe', {
           dbitems: data[0].recipes,
           user: req.user,
@@ -72,6 +73,13 @@ function findAllById (req, res) {
   }
 }
 
+function findOneRecipe (req, res) {
+  Recipe.find({name: req.params.id}, function (err, data) {
+    if (err) res.send(err)
+    else res.json(data)
+  })
+}
+
 function destroyAll (req, res) {
   req.user.recipes.splice(0)
   req.user.save()
@@ -83,6 +91,7 @@ function updateNotes (req, res) {
     _id: req.body.recipeid
   })
     .exec(function (err, data) {
+      if (err) console.log(err)
       data[0].cookingnotes.push(req.body.comment)
       data[0].save()
       res.redirect('/favrecipe')
@@ -94,6 +103,7 @@ function deleteOne (req, res) {
     _id: req.body.recipeid
   })
   .exec(function (err, data) {
+    if (err) console.log(err)
     res.redirect('/favrecipe')
   })
 }
@@ -112,7 +122,7 @@ function convert (num) {
     return (`Time: ${minutes} minutes required`)
   } else {
     var hours = Math.floor(num / 3600)
-    var minutes = num % 3600 / 60
+    minutes = num % 3600 / 60
     return (`Time: ${hours} hours and ${minutes} minutes required`)
   }
 }
@@ -133,5 +143,6 @@ module.exports = {
   updateNotes,
   deleteOne,
   authenticateUser,
-  addFeatRecToUser
+  addFeatRecToUser,
+  findOneRecipe
 }

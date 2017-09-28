@@ -25,20 +25,20 @@ const userSchema = new Schema({
   }]
 })
 
-userSchema.pre('save', function(next){
+userSchema.pre('save', function (next) {
   var user = this
   if (!user.isModified('password')) return next()
-  var hash = bcrypt.hash(user.password,10,function(err,hash){
-    if(err) return next(err)
-    user.password=hash
+  bcrypt.hash(user.password, 10, function (err, hash) {
+    if (err) return next(err)
+    user.password = hash
     next()
   })
 })
 
-userSchema.methods.validPassword = function(password) {
+userSchema.methods.validPassword = function (password) {
   // Compare is a bcrypt method that will return a boolean,
-  return bcrypt.compareSync(password, this.password);
-};
+  return bcrypt.compareSync(password, this.password)
+}
 
 const User = mongoose.model('User', userSchema)
 

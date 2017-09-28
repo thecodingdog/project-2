@@ -1,4 +1,4 @@
-//getting data on original page, then following to get data on inside page works!
+// getting data on original page, then following to get data on inside page works!
 
 // const mongoose = require('mongoose')
 const osmosis = require('osmosis')
@@ -39,7 +39,7 @@ osmosis
     data => {
       data.forEach(
         recipe => {
-          console.log(recipe);
-          })
+          console.log(recipe)
         })
+    })
   .error(console.log)

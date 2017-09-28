@@ -2,15 +2,15 @@ const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
 const User = require('../models/User')
 
-//passport "serializes" objects to make them easy to store, converting the user to an identifier (id)
-passport.serializeUser(function (user,done){
+// passport "serializes" objects to make them easy to store, converting the user to an identifier (id)
+passport.serializeUser(function (user, done) {
   done(null, user.id)
-  console.log(user.id);
+  // console.log(user.id)
 })
 
 // Passport "deserializes" objects by taking the user's serialization (id) and looking it up in the database
-passport.deserializeUser(function(id,done){
-  User.findById(id, function(err,user){
+passport.deserializeUser(function (id, done) {
+  User.findById(id, function (err, user) {
     done(err, user)
   })
 })
@@ -23,30 +23,30 @@ passport.use(new LocalStrategy({
 }, localVerify))
 
 // callback function that we are defining within localVerify
-//this is triggered upon login to compare, but to see success failure processes, goes to router
-function localVerify(req, passportEmail, password, next) {
+// this is triggered upon login to compare, but to see success failure processes, goes to router
+function localVerify (req, passportEmail, password, next) {
   User
     .findOne({
       email: passportEmail
     })
     .exec(function (err, foundUser) {
-    if (err) {
-      console.log('err', err)
-      return next(err) // go to failureRedirect
-    }
-    if (!foundUser) {
-       return next(null, err, req.flash('message', 'User does not exist'));
-    }
-    if (foundUser.validPassword(password)) {
-      console.log('success, redirect to whatever router says')
-      next(null, foundUser) // go to successRedirect
-    }
-    if (!foundUser.validPassword(password)) {
-      return next(null, err, req.flash('message', 'Oops! Wrong password!'));
-      //to set error msg using failureFlash
+      if (err) {
+        console.log('err', err)
+        return next(err) // go to failureRedirect
+      }
+      if (!foundUser) {
+        return next(null, err, req.flash('message', 'User does not exist'))
+      }
+      if (foundUser.validPassword(password)) {
+        // console.log('success, redirect to whatever router says')
+        next(null, foundUser) // go to successRedirect
+      }
+      if (!foundUser.validPassword(password)) {
+        return next(null, err, req.flash('message', 'Oops! Wrong password!'))
+      // to set error msg using failureFlash
       // next(null, err) // goes to failureRedirect
-    }
-  })
+      }
+    })
 }
 
 module.exports = passport

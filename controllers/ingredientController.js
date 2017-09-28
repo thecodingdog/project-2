@@ -2,7 +2,7 @@ require('dotenv').config()
 
 const Ingredient = require('../models/Ingredient')
 const User = require('../models/User')
-const passport = require('../config/passport')
+// const passport = require('../config/passport')
 
 var authToken = process.env.authToken
 var accountSid = process.env.accountSid
@@ -42,7 +42,7 @@ function findAllById (req, res) {
     })
       .populate('ingredients')
       .exec(function (err, data) {
-        if (err) send(err)
+        if (err) console.log(err)
         res.render('ingredient', {
           dbitems: data[0].ingredients,
           user: req.user

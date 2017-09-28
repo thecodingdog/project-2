@@ -16,8 +16,8 @@ mongoose.connect(murl, {
   }
 )
 let n = 1
-while (n<3) {
-osmosis
+while (n < 3) {
+  osmosis
   .get(`http://www.noobcook.com/category/recipes/asian-cuisine/chinese/page/${n}/`)
   // .set({imageUrl: '.teaserpost > a > img@src'})
   .find('.teaserpost > a')
@@ -27,16 +27,16 @@ osmosis
   .set([
     osmosis
     .set({
-    name: 'h2.posttitle',
-    imageUrl: '.post img@src',
-    imageUrlSmall: '.recipe .photo@src',
-    serving: 'span.yield',
-    timeDisplay: 'span.cooktime',
-    instructionsUrl: '.pagenumbers .left a@href',
-    ingredients: [
-      osmosis
+      name: 'h2.posttitle',
+      imageUrl: '.post img@src',
+      imageUrlSmall: '.recipe .photo@src',
+      serving: 'span.yield',
+      timeDisplay: 'span.cooktime',
+      instructionsUrl: '.pagenumbers .left a@href',
+      ingredients: [
+        osmosis
       .find('div.ingredient > ul > li')],
-    instructions: [
+      instructions: [
         osmosis
         .find('div.instructions > ol > li')]
     })
@@ -47,27 +47,26 @@ osmosis
         recipe => {
           // console.log(recipe);
           if (recipe.imageUrlSmall) {
-          Recipe.findOne({name: recipe.name}, function(err,found){
-            if (err) console.log(err)
-            if (!found){
-              Recipe.create({
-                name: recipe.name,
-                imageUrl: recipe.imageUrl,
-                imageUrlSmall: recipe.imageUrlSmall,
-                serving: recipe.serving,
-                timeDisplay: recipe.timeDisplay,
-                ingredients: recipe.ingredients,
-                instructions: recipe.instructions,
-                instructionsUrl: recipe.instructionsUrl
-              })
-              console.log('saved recipe');
-            }
-            else console.log('recipe existed before');
-          })
-        }
-          })
-        }
+            Recipe.findOne({name: recipe.name}, function (err, found) {
+              if (err) console.log(err)
+              if (!found) {
+                Recipe.create({
+                  name: recipe.name,
+                  imageUrl: recipe.imageUrl,
+                  imageUrlSmall: recipe.imageUrlSmall,
+                  serving: recipe.serving,
+                  timeDisplay: recipe.timeDisplay,
+                  ingredients: recipe.ingredients,
+                  instructions: recipe.instructions,
+                  instructionsUrl: recipe.instructionsUrl
+                })
+                console.log('saved recipe')
+              } else console.log('recipe existed before')
+            })
+          }
+        })
+    }
       )
   .error(console.log)
-n++
+  n++
 }

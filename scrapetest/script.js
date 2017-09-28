@@ -20,7 +20,7 @@ mongoose.connect(murl, {
 )
 
 var n = 3
-var array = []
+// var array = []
 
 // while (n < 2) {
 var url = `http://themeatmen.sg/recipes/page/${n}/`
@@ -40,13 +40,13 @@ osmosis
           osmosis
           .find('.recipe-ingredients > ol > li > p')
         ],
-        instructions: [
-          osmosis
+          instructions: [
+            osmosis
           .find('.recipe-instructions > ol > li > p')
-        ],
-        servings: '.recipe-header > ul > li:nth-child(1) > h3',
-        time: '.recipe-header > ul > li:nth-child(2) > h3',
-        name: '.entry-title',
+          ],
+          servings: '.recipe-header > ul > li:nth-child(1) > h3',
+          time: '.recipe-header > ul > li:nth-child(2) > h3',
+          name: '.entry-title'
         })
       })
     ])
@@ -66,7 +66,7 @@ osmosis
               instructionsUrl: recipe.location
             })
           })
-        })
+      })
     //       recipe => {
     //         var newRecipe = new Recipe({
     //           name: recipe.title,

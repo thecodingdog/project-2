@@ -52,20 +52,25 @@ app.use(methodOverride('_method'))
 // setup all files that the proj needs to require
 const userRoute = require('./routes/userRoute')
 const recipeRoute = require('./routes/recipeRoute')
-const homeRoute = require('./routes/homeRoute')
+// const homeRoute = require('./routes/homeRoute')
 const ingredientRoute = require('./routes/ingredientRoute')
+const homeController = require('./controllers/homeController')
 
 // public routes
 app.get('/search', function (req, res) {
   res.render('search')
 })
 
-app.get('/', function (req, res) {
-  res.redirect('/home/all')
-})
+app.get('/', homeController.findAll)
+
+app.get('/home/:id', homeController.findOne)
+
+// app.get('/', function (req, res) {
+//   res.redirect('/home/all')
+// })
 
 // routes
-app.use('/home', homeRoute)
+// app.use('/home', homeRoute)
 app.use('/userAuth', userRoute)
 app.use('/favrecipe', recipeRoute)
 app.use('/ingredient', ingredientRoute)

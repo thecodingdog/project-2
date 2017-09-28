@@ -1,9 +1,11 @@
 const express = require('express')
 const router = express.Router()
 const recipeController = require('../controllers/recipeController')
-const passport = require('../config/passport')
+// const passport = require('../config/passport')
 
 router.get('/', recipeController.authenticateUser, recipeController.findAllById)
+
+router.get('/:id', recipeController.authenticateUser, recipeController.findOneRecipe)
 
 router.post('/add', recipeController.add)
 
